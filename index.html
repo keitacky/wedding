@@ -1,33 +1,96 @@
-.html -->
+Dropbox/MyScripts/Wedding/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Wedding</title>
+    <title>John & Sarah | Wedding Celebration</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>John & Sarah</h1>
-        <p>June 1, 2025</p>
-    </header>
-    
-    <main>
-        <section id="welcome">
-            <h2>Welcome</h2>
-            <p>We are delighted to have you join us in celebrating our special day.</p>
-        </section>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">J & S</a>
+        <div class="nav-links">
+            <a href="#welcome">Home</a>
+            <a href="#story">Our Story</a>
+            <a href="#details">Details</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#gifts">Registry</a>
+            <a href="#rsvp">RSVP</a>
+        </div>
+    </nav>
 
-        <section id="event-details">
-            <h2>Event Details</h2>
-            <p>Date & Time: June 1, 2025 at 2:00 PM</p>
-            <p>Location: Cherry Blossom Gardens</p>
-            <!-- Map can be embedded here -->
-        </section>
+    <!-- Hero Section -->
+    <section id="welcome" class="hero-section full-screen">
+        <div class="hero-content">
+            <h1>John & Sarah</h1>
+            <p class="wedding-date">June 1, 2025</p>
+            <a href="#details" class="btn btn-primary">Our Wedding</a>
+        </div>
+    </section>
 
-        <section id="our-story">
-            <h2>Our Story</h2>
+    <!-- Story Section -->
+    <section id="story" class="full-screen parallax-section">
+        <div class="content-container">
+            <div class="section-heading">
+                <h2>Our Love Story</h2>
+                <div class="divider"><span></span></div>
+            </div>
+            <div class="story-content">
+                <p>Our journey together began with a chance meeting that would forever change our lives. What started as a simple conversation blossomed into a deep connection that only grows stronger with each passing day.</p>
+                <a href="#gallery" class="btn">View Our Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section id="details" class="details-section">
+        <div class="content-container">
+            <div class="section-heading">
+                <h2>Wedding Details</h2>
+                <div class="divider"><span></span></div>
+            </div>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <img src="images/calendar-icon.png" alt="Date">
+                    </div>
+                    <h3>When</h3>
+                    <p>June 1, 2025<br>2:00 PM</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <img src="images/location-icon.png" alt="Location">
+                    </div>
+                    <h3>Where</h3>
+                    <p>Cherry Blossom Gardens<br>1234 Wedding Lane<br>Celebration City</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <img src="images/dress-icon.png" alt="Dress Code">
+                    </div>
+                    <h3>Attire</h3>
+                    <p>Formal<br>Black Tie Optional</p>
+                </div>
+            </div>
+            <div class="countdown-container">
+                <h3>Countdown to our special day</h3>
+                <div id="timer" class="countdown"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="full-screen gallery-section">
+        <div class="content-container">
+            <div class="section-heading light">
+                <h2>Our Moments</h2>
+                <div class="divider light"><span></span></div>
+            </div>
             <div class="photo-gallery">
                 <div class="gallery-container">
                     <div class="gallery-image active" data-index="0">
@@ -60,42 +123,66 @@
                     </div>
                 </div>
                 <div class="gallery-controls">
-                    <button id="prev-photo">Previous</button>
+                    <button id="prev-photo" class="gallery-arrow"><span>&lt;</span></button>
                     <div class="dots-container"></div>
-                    <button id="next-photo">Next</button>
+                    <button id="next-photo" class="gallery-arrow"><span>&gt;</span></button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="gifts">
-            <h2>Registry & Gifts</h2>
-            <p>Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we've included some options below:</p>
+    <!-- Gifts Section -->
+    <section id="gifts" class="gifts-section">
+        <div class="content-container">
+            <div class="section-heading">
+                <h2>Registry & Gifts</h2>
+                <div class="divider"><span></span></div>
+            </div>
+            <p class="section-intro">Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we've included some options below:</p>
             
             <div class="payment-options">
-                <div class="payment-option">
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <img src="images/venmo-logo.png" alt="Venmo">
+                    </div>
                     <h3>Venmo</h3>
-                    <p>Username: @your-venmo-username</p>
+                    <p>@your-venmo-username</p>
                     <img src="images/venmo-qr.png" alt="Venmo QR Code" class="qr-code">
                 </div>
                 
-                <div class="payment-option">
+                <div class="payment-card">
+                    <div class="payment-icon">
+                        <img src="images/zelle-logo.png" alt="Zelle">
+                    </div>
                     <h3>Zelle</h3>
                     <p>Email: your-email@example.com</p>
                     <p>Phone: (123) 456-7890</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="rsvp">
-            <h2>RSVP</h2>
-            <div id="rsvp-form">
+    <!-- RSVP Section -->
+    <section id="rsvp" class="full-screen rsvp-section">
+        <div class="content-container">
+            <div class="section-heading light">
+                <h2>Join Us</h2>
+                <div class="divider light"><span></span></div>
+            </div>
+            <p class="section-intro light">We hope you can join us for our special day. Please RSVP by May 1, 2025.</p>
+            <div id="rsvp-form" class="rsvp-form-container">
                 <!-- Form will be dynamically generated with JavaScript -->
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 John & Sarah</p>
+        <div class="footer-content">
+            <div class="footer-logo">J & S</div>
+            <p>Looking forward to celebrating with you</p>
+            <p class="copyright">&copy; 2025 John & Sarah</p>
+        </div>
     </footer>
 
     <script src="action.js"></script>
