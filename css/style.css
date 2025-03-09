@@ -623,3 +623,189 @@ footer {
         font-size: 1rem;
     }
 }
+
+
+/* フルスクリーンセクションの修正 */
+.full-screen {
+    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* 要素がはみ出さないように */
+}
+
+/* スクロールスナップ */
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+/* スクロールスナップポイント */
+section {
+    scroll-snap-align: start;
+    position: relative;
+}
+
+/* セクションインジケーター修正 */
+.section-indicators {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.section-indicator.active {
+    background-color: var(--primary-color);
+    transform: scale(1.3);
+}
+
+/* 背景画像を使用するセクションの強化 */
+.hero-section,
+.parallax-section,
+.gallery-section,
+.rsvp-section {
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; /* モバイルでの問題を防止 */
+}
+
+/* 背景画像用のオーバーレイ調整 */
+.hero-section::before,
+.parallax-section::before,
+.gallery-section::before,
+.rsvp-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35); /* より透明に */
+    z-index: 1;
+}
+
+/* コンテンツの位置調整 */
+.content-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+/* アクティブセクションのアニメーション */
+.active-section {
+    z-index: 10;
+}
+
+/* セクション背景の追加 */
+.section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1s ease, opacity 1s ease;
+    transform: scale(1.1);
+    opacity: 0.8;
+    z-index: 0;
+}
+
+.active-section .section-bg {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* プリローダースタイル追加 */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.preloader-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.preloader-text {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+/* アニメーション強化 */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-on-scroll.exit-up {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.animate-on-scroll.exit-down {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ヒーローコンテンツのアニメーション */
+.hero-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.hero-content.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
