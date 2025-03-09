@@ -149,6 +149,10 @@ p {
     background-color: white;
 }
 
+.divider.small span {
+    width: 50px;
+}
+
 /* Navigation */
 .navbar {
     position: fixed;
@@ -280,7 +284,7 @@ p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .detail-card {
@@ -577,6 +581,11 @@ footer {
     background-color: var(--dark-color);
     color: white;
     padding: 60px 0;
+    min-height: auto;
+    height: auto;
+    scroll-snap-align: none;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-content {
@@ -933,4 +942,22 @@ footer {
         height: 8px;
         margin: 10px 0;
     }
+}
+
+/* 最後のセクションの下部マージンを調整 */
+#rsvp {
+    margin-bottom: 0;
+    padding-bottom: 60px;
+}
+
+/* 寄付セクションのスタイルを追加 */
+.donation-section {
+    margin-top: 80px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 60px;
+}
+
+.section-subheading {
+    text-align: center;
+    margin-bottom: 30px;
 }

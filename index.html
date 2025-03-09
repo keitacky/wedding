@@ -19,7 +19,6 @@ Dropbox/MyScripts/Wedding/index.html -->
             <a href="#story">Our Story</a>
             <a href="#details">Details</a>
             <a href="#gallery">Gallery</a>
-            <a href="#gifts">Registry</a>
             <a href="#rsvp">RSVP</a>
         </div>
     </nav>
@@ -80,9 +79,40 @@ Dropbox/MyScripts/Wedding/index.html -->
                     <p>Formal<br>Black Tie Optional</p>
                 </div>
             </div>
+            
+            <!-- カウントダウンの下に寄付セクションを追加 -->
             <div class="countdown-container">
                 <h3>Countdown to our special day</h3>
                 <div id="timer" class="countdown"></div>
+            </div>
+            
+            <!-- Donation Section (旧Gifts Section) -->
+            <div class="donation-section">
+                <div class="section-subheading">
+                    <h3>Donation</h3>
+                    <div class="divider small"><span></span></div>
+                </div>
+                <p class="section-intro">Your presence at our wedding is the greatest gift of all. If you wish to support our new beginning, we would be honored to receive a contribution:</p>
+                
+                <div class="payment-options">
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <img src="images/venmo-logo.png" alt="Venmo">
+                        </div>
+                        <h3>Venmo</h3>
+                        <p>@your-venmo-username</p>
+                        <img src="images/venmo-qr.png" alt="Venmo QR Code" class="qr-code">
+                    </div>
+                    
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <img src="images/zelle-logo.png" alt="Zelle">
+                        </div>
+                        <h3>Zelle</h3>
+                        <p>Email: your-email@example.com</p>
+                        <p>Phone: (123) 456-7890</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -130,38 +160,6 @@ Dropbox/MyScripts/Wedding/index.html -->
                     <button id="prev-photo" class="gallery-arrow"><span>&lt;</span></button>
                     <div class="dots-container"></div>
                     <button id="next-photo" class="gallery-arrow"><span>&gt;</span></button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gifts Section -->
-    <section id="gifts" class="gifts-section full-screen">
-        <div class="section-bg" style="background-image: url('images/gifts-bg.jpg');"></div>
-        <div class="content-container">
-            <div class="section-heading">
-                <h2>Registry & Gifts</h2>
-                <div class="divider"><span></span></div>
-            </div>
-            <p class="section-intro">Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we've included some options below:</p>
-            
-            <div class="payment-options">
-                <div class="payment-card">
-                    <div class="payment-icon">
-                        <img src="images/venmo-logo.png" alt="Venmo">
-                    </div>
-                    <h3>Venmo</h3>
-                    <p>@your-venmo-username</p>
-                    <img src="images/venmo-qr.png" alt="Venmo QR Code" class="qr-code">
-                </div>
-                
-                <div class="payment-card">
-                    <div class="payment-icon">
-                        <img src="images/zelle-logo.png" alt="Zelle">
-                    </div>
-                    <h3>Zelle</h3>
-                    <p>Email: your-email@example.com</p>
-                    <p>Phone: (123) 456-7890</p>
                 </div>
             </div>
         </div>
