@@ -16,8 +16,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll; /* スクロールバーを常に表示 */
+    height: 100%;
 }
 
 body {
@@ -25,6 +24,7 @@ body {
     line-height: 1.6;
     color: var(--dark-color);
     overflow-x: hidden;
+    min-height: 100%;
 }
 
 /* Typography */
@@ -100,27 +100,21 @@ p {
 /* Layout */
 .full-screen {
     min-height: 100vh;
-    height: 100vh;
     width: 100%;
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden; /* 要素がはみ出さないように */
-    scroll-snap-align: start;
 }
 
 .content-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 40px;
+    padding: 40px;
     position: relative;
     z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .section-heading {
@@ -203,30 +197,42 @@ p {
     color: var(--primary-color);
 }
 
-/* Hero Section */
-.hero-section {
-    background-image: url('../images/hero-bg.jpg');
+/* Section backgrounds */
+.section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
-    position: relative;
-    color: white;
+    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 0;
 }
 
-.hero-section::before {
+/* Section overlays */
+.hero-section::before,
+.parallax-section::before,
+.gallery-section::before,
+.rsvp-section::before,
+.details-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
 }
 
+/* Hero Section */
 .hero-content {
     position: relative;
     z-index: 2;
     max-width: 800px;
     padding: 0 20px;
+    text-align: center;
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 1s ease, transform 1s ease;
@@ -244,27 +250,7 @@ p {
     font-family: var(--font-secondary);
 }
 
-/* Parallax Section */
-.parallax-section {
-    background-image: url('../images/story-bg.jpg');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    color: white;
-}
-
-.parallax-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
+/* Story Section */
 .story-content {
     max-width: 700px;
     margin: 0 auto;
@@ -273,26 +259,37 @@ p {
 
 /* Details Section */
 .details-section {
-    background-color: #fafafa;
-    padding: 80px 0;
-    min-height: 100vh;
-    padding: 100px 0;
+    color: white;
+}
+
+.compact-details {
+    width: 100%;
+}
+
+.details-main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    gap: 30px;
 }
 
 .details-grid {
+    flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
 }
 
 .detail-card {
     text-align: center;
     padding: 30px;
-    background-color: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    color: var(--dark-color);
 }
 
 .detail-card:hover {
@@ -310,46 +307,113 @@ p {
 
 /* Countdown */
 .countdown-container {
+    flex: 0 0 300px;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
     text-align: center;
-    margin-top: 60px;
+    color: var(--dark-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     margin-top: 20px;
 }
 
 .countdown span {
-    background-color: white;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 10px;
+    min-width: 70px;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+}
+
+/* Donation Section */
+.donation-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-subheading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.donation-section .section-intro {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 25px 30px;
+    border-radius: 6px;
     color: var(--dark-color);
-    padding: 20px;
-    min-width: 100px;
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    font-size: 1.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-style: italic;
+    position: relative;
+}
+
+.donation-section .section-intro::before {
+    content: '"';
+    font-family: var(--font-primary);
+    font-size: 60px;
+    position: absolute;
+    top: -30px;
+    left: 15px;
+    color: var(--primary-color);
+    opacity: 0.3;
+}
+
+.payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.payment-card {
+    flex-basis: 350px;
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    color: var(--dark-color);
+    transition: transform 0.3s ease;
+}
+
+.payment-card:hover {
+    transform: translateY(-10px);
+}
+
+.payment-icon {
+    margin-bottom: 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-icon img {
+    max-height: 40px;
+    max-width: 120px;
+    object-fit: contain;
+}
+
+.qr-code {
+    max-width: 150px;
+    margin: 20px auto 0;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 5px;
+    background: white;
 }
 
 /* Gallery Section */
-.gallery-section {
-    background-image: url('../images/gallery-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    color: white;
-}
-
-.gallery-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
 .photo-gallery {
     position: relative;
     margin: 40px 0;
@@ -450,77 +514,7 @@ p {
     border-color: var(--primary-color);
 }
 
-/* Gifts Section */
-.gifts-section {
-    padding: 80px 0;
-    background-color: #fafafa;
-    min-height: 100vh;
-    padding: 100px 0;
-}
-
-.payment-options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-}
-
-.payment-card {
-    flex-basis: 350px;
-    text-align: center;
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-    transition: transform 0.3s ease;
-}
-
-.payment-card:hover {
-    transform: translateY(-10px);
-}
-
-.payment-icon {
-    margin-bottom: 20px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.payment-icon img {
-    max-height: 50px;
-    max-width: 80%;
-    object-fit: contain;
-}
-
-.qr-code {
-    max-width: 150px;
-    margin: 20px auto 0;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 5px;
-    background: white;
-}
-
 /* RSVP Section */
-.rsvp-section {
-    background-image: url('../images/rsvp-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    color: white;
-}
-
-.rsvp-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
 .rsvp-form-container {
     max-width: 600px;
     margin: 0 auto;
@@ -590,9 +584,6 @@ footer {
     background-color: var(--dark-color);
     color: white;
     padding: 60px 0;
-    min-height: auto;
-    height: auto;
-    scroll-snap-align: none;
     position: relative;
     z-index: 10;
 }
@@ -601,6 +592,7 @@ footer {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    padding: 0 20px;
 }
 
 .footer-logo {
@@ -615,83 +607,24 @@ footer {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Animation Classes */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+/* Venue link */
+.venue-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--primary-color);
+    transition: all 0.3s ease;
 }
 
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+.venue-link:hover {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 3rem;
-    }
-    
-    h2 {
-        font-size: 2.2rem;
-    }
-    
-    .navbar {
-        padding: 15px 20px;
-    }
-    
-    .nav-links {
-        display: none; /* For mobile, would need additional JavaScript for toggle */
-    }
-    
-    .content-container {
-        padding: 60px 20px;
-    }
-    
-    .details-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .gallery-container {
-        height: 400px;
-    }
-    
-    .countdown span {
-        min-width: 70px;
-        padding: 15px;
-        font-size: 1rem;
-    }
-}
-
-
-/* フルスクリーンセクションの修正 */
-.full-screen {
-    min-height: 100vh;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden; /* 要素がはみ出さないように */
-    scroll-snap-align: start;
-}
-
-/* スクロールスナップ */
-html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll; /* スクロールバーを常に表示 */
-}
-
-/* スクロールスナップポイント */
-section {
-    scroll-snap-align: start;
-    position: relative;
-}
-
-/* セクションインジケーター修正 */
+/* Section indicators */
 .section-indicators {
     position: fixed;
     right: 30px;
@@ -700,18 +633,17 @@ section {
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .section-indicator {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 15px 0;
+    border: 2px solid rgba(255, 255, 255, 0.7);
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -720,74 +652,7 @@ section {
     transform: scale(1.3);
 }
 
-/* 背景画像を使用するセクションの強化 */
-.hero-section,
-.parallax-section,
-.gallery-section,
-.rsvp-section {
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll; /* モバイルでの問題を防止 */
-}
-
-/* 背景画像用のオーバーレイ調整 */
-.hero-section::before,
-.parallax-section::before,
-.gallery-section::before,
-.rsvp-section::before,
-.gifts-section::before,
-.details-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, 
-                              rgba(0,0,0,0.2) 0%, 
-                              rgba(0,0,0,0.5) 100%);
-    z-index: 1;
-}
-
-/* コンテンツの位置調整 */
-.content-container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 40px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* アクティブセクションのアニメーション */
-.active-section {
-    z-index: 10;
-}
-
-/* セクション背景の追加 */
-.section-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: transform 1s ease, opacity 1s ease;
-    transform: scale(1.1);
-    opacity: 0.8;
-    z-index: 0;
-}
-
-.active-section .section-bg {
-    transform: scale(1);
-    opacity: 1;
-}
-
-/* プリローダースタイル追加 */
+/* Preloader */
 .preloader {
     position: fixed;
     top: 0;
@@ -828,7 +693,7 @@ section {
     letter-spacing: 3px;
 }
 
-/* アニメーション強化 */
+/* Animation */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -840,108 +705,38 @@ section {
     transform: translateY(0);
 }
 
-.animate-on-scroll.exit-up {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.animate-on-scroll.exit-down {
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-/* ヒーローコンテンツのアニメーション */
-.hero-content {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
-}
-
-.hero-content.animate-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Karisma風のフルスクリーン表示強化 */
-.full-screen {
-    min-height: 100vh;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-}
-
-/* セクション背景をよりダイナミックに */
-.section-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.active-section .section-bg {
-    transform: scale(1.03);
-}
-
-/* コンテンツのレイアウト改善 */
-.content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-}
-
-/* スクロールインジケーターの強化 */
-.section-indicators {
-    right: 30px;
-}
-
-.section-indicator {
-    width: 10px;
-    height: 10px;
-    margin: 10px 0;
-    background: rgba(255, 255, 255, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.section-indicator.active {
-    background: var(--primary-color);
-    transform: scale(1.3);
-}
-
-/* Karisma風の淡い色合いのオーバーレイ調整 */
-.hero-section::before,
-.parallax-section::before,
-.gallery-section::before,
-.rsvp-section::before {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
-}
-
-/* フッターの最適化 */
-footer {
-    min-height: auto;
-    scroll-snap-align: none;
-}
-
-/* アニメーション効果強化 */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s ease, transform 1s ease;
-}
-
-.animate-on-scroll.in-view {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* モバイル最適化 */
+/* Responsive styles */
 @media (max-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2.2rem;
+    }
+    
+    .navbar {
+        padding: 15px 20px;
+    }
+    
+    .nav-links {
+        display: none; /* Mobile navigation would need a toggle */
+    }
+    
+    .content-container {
+        padding: 40px 20px;
+    }
+    
+    .gallery-container {
+        height: 400px;
+    }
+    
+    .countdown span {
+        min-width: 60px;
+        padding: 10px;
+        font-size: 1rem;
+    }
+    
     .section-indicators {
         right: 10px;
     }
@@ -949,116 +744,17 @@ footer {
     .section-indicator {
         width: 8px;
         height: 8px;
-        margin: 10px 0;
     }
-}
-
-/* 最後のセクションの下部マージンを調整 */
-#rsvp {
-    margin-bottom: 0;
-    padding-bottom: 60px;
-}
-
-/* 寄付セクションのスタイルを追加 */
-.donation-section {
-    margin-top: 80px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 60px;
-}
-
-.section-subheading {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* 会場リンクのスタイル */
-.venue-link {
-    display: inline-block;
-    margin-top: 10px;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    border-bottom: 1px solid var(--primary-color);
-    transition: all 0.3s ease;
-}
-
-.venue-link:hover {
-    color: var(--accent-color);
-    border-bottom-color: var(--accent-color);
-}
-
-/* Donationセクションのスタイル改善 */
-.donation-section .section-intro {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 20px 30px;
-    border-radius: 6px;
-    color: var(--dark-color);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    max-width: 800px;
-    margin: 0 auto 30px;
-    font-style: italic;
-    position: relative;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-.donation-section .section-intro::before {
-    content: '"';
-    font-family: var(--font-primary);
-    font-size: 60px;
-    position: absolute;
-    top: -20px;
-    left: 10px;
-    color: var(--primary-color);
-    opacity: 0.2;
-}
-
-/* Detailsセクションをコンパクトに */
-.compact-details {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px;
-}
-
-.details-main-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.details-grid {
-    flex: 1;
-    max-width: 65%;
-}
-
-.countdown-container {
-    flex: 1;
-    max-width: 30%;
-    margin-top: 0;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 6px;
-    text-align: center;
-}
-
-/* 寄付セクションの位置調整 */
-.donation-section {
-    margin-top: 30px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 40px;
-}
-
-/* モバイル対応 */
-@media (max-width: 768px) {
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .details-main-container {
         flex-direction: column;
     }
     
-    .details-grid, .countdown-container {
-        max-width: 100%;
-        margin-bottom: 30px;
+    .countdown-container {
+        width: 100%;
     }
 }

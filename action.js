@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function()  {
     // Page preloader - ensures images load completely
     const preloader = document.createElement('div');
     preloader.className = 'preloader';
