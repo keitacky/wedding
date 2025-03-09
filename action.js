@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Countdown timer (keeping existing code)
-    const weddingDate = new Date('2025-06-01T14:00:00');
+    const weddingDate = new Date('2025-05-26T14:00:00');
     const timer = document.getElementById('timer');
     
     function updateCountdown() {
