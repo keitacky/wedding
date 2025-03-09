@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     preloader.className = 'preloader';
     preloader.innerHTML = `
         <div class="spinner"></div>
-        <div class="preloader-text">J & S</div>
+        <div class="preloader-text">K & M</div>
     `;
     document.body.appendChild(preloader);
     
