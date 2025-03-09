@@ -210,7 +210,6 @@ p {
     background-position: center;
     position: relative;
     color: white;
-    text-align: center;
 }
 
 .hero-section::before {
@@ -469,7 +468,7 @@ p {
 .payment-card {
     flex-basis: 350px;
     text-align: center;
-    padding: 40px;
+    padding: 30px;
     background-color: white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     border-radius: 4px;
@@ -482,15 +481,25 @@ p {
 
 .payment-icon {
     margin-bottom: 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .payment-icon img {
-    height: 60px;
+    max-height: 50px;
+    max-width: 80%;
+    object-fit: contain;
 }
 
 .qr-code {
     max-width: 150px;
     margin: 20px auto 0;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 5px;
+    background: white;
 }
 
 /* RSVP Section */
@@ -977,4 +986,79 @@ footer {
 .venue-link:hover {
     color: var(--accent-color);
     border-bottom-color: var(--accent-color);
+}
+
+/* Donationセクションのスタイル改善 */
+.donation-section .section-intro {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px 30px;
+    border-radius: 6px;
+    color: var(--dark-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    max-width: 800px;
+    margin: 0 auto 30px;
+    font-style: italic;
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.donation-section .section-intro::before {
+    content: '"';
+    font-family: var(--font-primary);
+    font-size: 60px;
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    color: var(--primary-color);
+    opacity: 0.2;
+}
+
+/* Detailsセクションをコンパクトに */
+.compact-details {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.details-main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.details-grid {
+    flex: 1;
+    max-width: 65%;
+}
+
+.countdown-container {
+    flex: 1;
+    max-width: 30%;
+    margin-top: 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* 寄付セクションの位置調整 */
+.donation-section {
+    margin-top: 30px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 40px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .details-main-container {
+        flex-direction: column;
+    }
+    
+    .details-grid, .countdown-container {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
 }

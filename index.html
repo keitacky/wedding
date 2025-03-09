@@ -1,4 +1,3 @@
-Dropbox/MyScripts/Wedding/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,47 +50,49 @@ Dropbox/MyScripts/Wedding/index.html -->
     <!-- Details Section -->
     <section id="details" class="details-section full-screen">
         <div class="section-bg" style="background-image: url('images/details-bg.jpg');"></div>
-        <div class="content-container">
+        <div class="content-container compact-details">
             <div class="section-heading">
                 <h2>Wedding Details</h2>
                 <div class="divider"><span></span></div>
             </div>
-            <div class="details-grid">
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <img src="images/calendar-icon.png" alt="Date">
+            
+            <div class="details-main-container">
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <img src="images/calendar-icon.png" alt="Date">
+                        </div>
+                        <h3>When</h3>
+                        <p>May 26, 2025<br>1:00 PM</p>
                     </div>
-                    <h3>When</h3>
-                    <p>May 26, 2025<br>2:00 PM</p>
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <img src="images/location-icon.png" alt="Location">
+                        </div>
+                        <h3>Where</h3>
+                        <p>
+                            The Villa<br>
+                            14617 County Road 192<br>
+                            Tyler, TX<br>
+                            <a href="https://www.thevillatyler.com/" target="_blank" class="venue-link">View Venue</a>
+                        </p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">
+                            <img src="images/dress-icon.png" alt="Dress Code">
+                        </div>
+                        <h3>Attire</h3>
+                        <p>Formal<br>Black Tie Optional</p>
+                    </div>
                 </div>
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <img src="images/location-icon.png" alt="Location">
-                    </div>
-                    <h3>Where</h3>
-                    <p>
-                        The Villa<br>
-                        14617 County Road 192<br>
-                        Tyler, TX<br>
-                        <a href="https://www.thevillatyler.com/" target="_blank" class="venue-link">View Venue</a>
-                    </p>
-                </div>
-                <div class="detail-card">
-                    <div class="detail-icon">
-                        <img src="images/dress-icon.png" alt="Dress Code">
-                    </div>
-                    <h3>Attire</h3>
-                    <p>Formal<br>Black Tie Optional</p>
+                
+                <div class="countdown-container">
+                    <h3>Countdown to our special day</h3>
+                    <div id="timer" class="countdown"></div>
                 </div>
             </div>
             
-            <!-- カウントダウンの下に寄付セクションを追加 -->
-            <div class="countdown-container">
-                <h3>Countdown to our special day</h3>
-                <div id="timer" class="countdown"></div>
-            </div>
-            
-            <!-- Donation Section (旧Gifts Section) -->
+            <!-- Donation Section (コンパクトに) -->
             <div class="donation-section">
                 <div class="section-subheading">
                     <h3>Donation</h3>
