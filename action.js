@@ -118,24 +118,20 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Animate section entrance
         function animateSectionEnter(section) {
-            // Details/Donationセクションの特別処理
-            if (section.id === 'details') {
-                // すべての重要な要素を常に表示
-                section.querySelectorAll('.detail-card, .countdown-container, .payment-card, .section-heading, .section-subheading, .section-intro').forEach(el => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                });
-            } else {
-                // 他のセクションは通常どおりアニメーション (no-animationクラスは除外)
-                const elements = section.querySelectorAll('.animate-on-scroll:not(.no-animation)');
-                elements.forEach((el, i) => {
-                    setTimeout(() => {
-                        el.classList.add('in-view');
-                    }, i * 150);
-                });
+            // すべてのセクションを静的に表示（アニメーションなし）
+            if (section.classList.contains('static-content')) {
+                return; // 静的コンテンツはアニメーションしない
             }
             
-            // 背景画像のアニメーション
+            // 他のセクションのアニメーション（必要な場合）
+            const elements = section.querySelectorAll('.animate-on-scroll');
+            elements.forEach((el, i) => {
+                setTimeout(() => {
+                    el.classList.add('in-view');
+                }, i * 150);
+            });
+            
+            // 背景画像のアニメーション（軽量化）
             const bg = section.querySelector('.section-bg');
             if (bg) {
                 bg.style.transform = 'scale(1)';
@@ -176,16 +172,17 @@ document.addEventListener('DOMContentLoaded', function()  {
         // モバイル最適化
         const isMobile = window.innerWidth <= 768;
 
-        // モバイルではスクロールスナップの動作を緩和
+        // モバイルではスクロールスナップを無効化
         if (isMobile) {
             document.documentElement.style.scrollSnapType = 'none';
+            document.documentElement.style.scrollBehavior = 'auto';
             
-            // 178行目付近のスクロールオブザーバー設定
-            const observerOptions = {
-                root: null,
-                rootMargin: '-10% 0px', // モバイルでより広い範囲でセクション認識
-                threshold: 0.1 // より低い閾値
-            };
+            // スクロール処理を軽量化
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.minHeight = 'auto';
+                section.style.height = 'auto';
+            });
         } else {
             // PC向け設定
             const observerOptions = {

@@ -1040,3 +1040,149 @@ footer {
     padding: 30px;
     backdrop-filter: blur(2px);
 }
+
+/* テキスト視認性の改善 */
+.text-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content .text-container {
+    padding: 50px;
+}
+
+.hero-content h1, 
+.hero-content p, 
+.story-content p {
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    margin-bottom: 20px;
+}
+
+/* Wedding Details セクション改善 */
+.details-section .content-container.static-content {
+    display: block;
+    padding: 100px 30px 60px;
+}
+
+.details-main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.details-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    min-width: 0;
+}
+
+.detail-card {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--dark-color);
+    opacity: 1 !important;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.countdown-container {
+    flex: 0 0 300px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--dark-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Donation Section 修正 */
+.donation-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.section-subheading h3 {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 2.2rem;
+}
+
+.donation-section .section-intro {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    color: var(--dark-color);
+    max-width: 800px;
+    margin: 0 auto 40px;
+    position: relative;
+    font-style: italic;
+}
+
+.payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.payment-card {
+    flex: 0 0 calc(50% - 30px);
+    max-width: 350px;
+    min-width: 280px;
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    color: var(--dark-color);
+    transition: transform 0.3s ease;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .text-container {
+        padding: 25px;
+    }
+    
+    .details-section .content-container.static-content {
+        padding: 80px 15px 40px;
+    }
+    
+    .details-main-container {
+        flex-direction: column;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-card {
+        flex: 0 0 100%;
+    }
+    
+    .countdown-container {
+        width: 100%;
+    }
+}
