@@ -69,163 +69,28 @@ p { margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
 .payment-icon { margin-bottom: 25px; height: 60px; display: flex; align-items: center; justify-content: center; }
 .payment-icon img { max-height: 40px; max-width: 120px; object-fit: contain; }
 .qr-code { width: 150px; height: 150px; margin: 20px auto 0; border: 1px solid #eee; border-radius: 8px; padding: 8px; background: white; object-fit: contain; }
-.photo-gallery {
-    position: relative;
-    overflow: visible;
-    padding-bottom: 70px;
-}
-.gallery-container { 
-    position: relative; 
-    height: 910px; /* 元の700pxから30%増加 */
-    width: 100%; 
-    max-width: 1000px; 
-    margin: 0 auto 20px; 
-}
+.photo-gallery { position: relative; overflow: visible; padding-bottom: 70px; }
+.gallery-container { position: relative; height: 910px; width: 100%; max-width: 1000px; margin: 0 auto 20px; }
 .gallery-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
 .gallery-image.active { opacity: 1; z-index: 1; }
 .gallery-image img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-.caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.85) 20%);
-    color: white;
-    border-radius: 0 0 8px 8px;
-    padding: 35px 25px 20px;
-    text-align: left;
-    max-height: 40%; /* 少し高さを増やす */
-}
-.caption h3 { color: white !important; font-size: 1.4rem; margin-bottom: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); line-height: 1.2; }
-.caption p {
-    max-height: 200px; /* テキスト表示領域を増加 (150pxから拡大) */
-    overflow-y: auto;
-    line-height: 1.6;
-    font-size: 0.95rem; /* フォントサイズ微調整 */
-    margin-bottom: 15px;
-    padding-right: 10px; /* スクロールバー用の余白 */
-}
-.caption p::-webkit-scrollbar {
-    width: 5px;
-}
-.caption p::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-}
-.gallery-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin-top: 20px;
-    padding: 10px 0;
-    position: relative;
-    z-index: 300;
-    user-select: none;
-    -webkit-user-select: none;
-    width: 100%;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.dots-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-grow: 1;
-    flex-shrink: 1;
-    max-width: 60%;
-}
+.caption { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8) 15%, rgba(0,0,0,0.9) 60%); color: white; border-radius: 0 0 8px 8px; padding: 40px 25px 25px; text-align: left; max-height: 50%; }
+.caption h3 { color: white !important; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); line-height: 1.3; }
+.caption p { color: rgba(255,255,255,0.9); font-size: 0.95rem; margin-bottom: 15px; max-height: 200px; overflow-y: auto; line-height: 1.6; padding-right: 10px; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; -webkit-appearance: none; -webkit-transform: translateZ(0); }
+.caption p::-webkit-scrollbar { width: 5px; -webkit-appearance: none; }
+.caption p::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.5); border-radius: 10px; }
+.gallery-controls { display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 20px; padding: 10px 0; position: relative; z-index: 300; user-select: none; -webkit-user-select: none; width: 100%; max-width: 1000px; margin-left: auto; margin-right: auto; }
+.dots-container { display: flex; justify-content: center; align-items: center; gap: 10px; flex-grow: 1; flex-shrink: 1; max-width: 60%; }
 .dot { width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.4); cursor: pointer; transition: all 0.3s ease; }
 .dot.active { background-color: var(--primary-color); transform: scale(1.3); }
-
-
-/* 統合後の最終スタイル */
-.gallery-arrow {
-    /* サイズ拡大 */
-    width: 70px !important;
-    height: 70px !important;
-    /* 視認性向上 */
-    background-color: rgba(0,0,0,0.7) !important;
-    border: 2px solid rgba(255,255,255,0.95) !important;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.4) !important;
-    /* アニメーション */
-    transition: all 0.2s ease !important;
-    /* レイアウト */
-    position: relative !important;
-    display: inline-flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 0 15px !important;
-    cursor: pointer !important;
-    /* 追加：ボタンを目立たせる */
-    border-radius: 50% !important;
-    z-index: 300 !important;
-}
-.gallery-arrow:hover {
-    background-color: rgba(214, 186, 141, 0.8) !important; /* primary-colorと同じ色味 */
-    transform: scale(1.05) !important;
-}
-.gallery-arrow span {
-    font-size: 36px !important;
-    font-weight: bold !important;
-    color: white !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8) !important;
-    position: relative !important;
-    z-index: 10 !important;
-    line-height: 1 !important;
-}
-
-/* iOSデバイス特有のスタイル - そのまま維持 */
+.gallery-arrow { width: 70px !important; height: 70px !important; background-color: rgba(0,0,0,0.7) !important; border: 2px solid rgba(255,255,255,0.95) !important; box-shadow: 0 3px 15px rgba(0,0,0,0.4) !important; transition: all 0.2s ease !important; position: relative !important; display: inline-flex !important; justify-content: center !important; align-items: center !important; margin: 0 15px !important; cursor: pointer !important; border-radius: 50% !important; z-index: 300 !important; }
+.gallery-arrow:hover { background-color: rgba(214, 186, 141, 0.8) !important; transform: scale(1.05) !important; }
+.gallery-arrow span { font-size: 36px !important; font-weight: bold !important; color: white !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8) !important; position: relative !important; z-index: 10 !important; line-height: 1 !important; }
 @supports (-webkit-touch-callout: none) {
-    .gallery-arrow {
-        /* 位置をリセット - 既存の設定を維持 */
-        position: relative !important;
-        display: inline-flex !important;
-        flex: 0 0 auto !important;
-        transform: none !important;
-        top: auto !important;
-        left: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-    }
+    .gallery-arrow { position: relative !important; display: inline-flex !important; flex: 0 0 auto !important; transform: none !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; }
+    .caption p { -webkit-overflow-scrolling: touch; padding-right: 15px; margin-right: -10px; }
 }
-
-/* モバイルデバイス対応の改善 */
-@media only screen and (max-width: 480px) {
-    .gallery-arrow {
-        /* 小さい画面でも十分な大きさを確保 */
-        width: 55px !important;
-        height: 55px !important;
-        margin: 0 8px !important;
-    }
-    
-    .gallery-arrow span {
-        font-size: 30px !important; /* 文字サイズも調整 */
-    }
-    
-    /* iOSモバイル向けの明示的な設定 */
-    @supports (-webkit-touch-callout: none) {
-        .gallery-arrow {
-            opacity: 1 !important;
-            background-color: rgba(0,0,0,0.8) !important; /* より濃く */
-            border: 2px solid rgba(255,255,255,1) !important; /* より目立つ境界線 */
-        }
-    }
-}
-
-/* ボタンの内容を強化 */
-#prev-photo::before, #next-photo::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
+#prev-photo::before, #next-photo::before { content: ''; display: block; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; }
 .gallery-arrow:active { background-color: var(--primary-color) !important; transform: scale(0.95); opacity: 0.9; }
 .rsvp-form-container { max-width: 600px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.95); border-radius: 12px; padding: 40px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
 #rsvp-form { display: flex; flex-direction: column; gap: 20px; }
@@ -263,6 +128,9 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
 @keyframes spin { to { transform: rotate(360deg); } }
 .preloader-text { font-family: var(--font-primary); font-size: 24px; letter-spacing: 3px; }
 .parallax-section .content-container { background-color: rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 30px; backdrop-filter: blur(2px); }
+.mini-countdown { margin-top: 10px; font-size: 0.85rem; padding: 8px 0; color: var(--primary-color); font-weight: 500; display: flex; flex-direction: column; align-items: center; border-top: 1px dashed rgba(0,0,0,0.1); width: 100%; }
+.mini-countdown span { display: inline-block; margin: 0 2px; }
+.mini-countdown .count-value { font-weight: bold; font-size: 1rem; color: var(--accent-color); }
 @media (max-width: 992px) { 
   .details-main-container { flex-direction: column; }
   .details-grid { width: 100%; max-width: 100%; grid-template-columns: repeat(3, 1fr); gap: 15px; }
@@ -275,6 +143,9 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
   .nav-links { display: none; }
   .content-container { padding: 40px 20px; }
   .gallery-container { height: 715px; }
+  .caption { max-height: 55%; padding: 35px 20px 20px; }
+  .caption p { max-height: 180px; font-size: 0.9rem; }
+  .caption h3 { font-size: 1.4rem; }
   .section-indicators { right: 10px; }
   .section-indicator { width: 8px; height: 8px; }
   .details-grid { grid-template-columns: 1fr; gap: 15px; }
@@ -287,15 +158,8 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
   .detail-card { padding: 20px; margin-bottom: 15px; }
   .payment-options { gap: 15px; }
   .parallax-section .content-container { padding: 20px; }
-  .caption {
-    padding: 35px 20px 20px;
-    max-height: 55%; /* モバイルではさらに大きく */
-    }
-    .caption p {
-        max-height: 30%;
-    }
-  .caption h3 { font-size: 1.4rem; }
-  .gallery-arrow { width: 55px; height: 55px; background-color: rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.7); }
+  .gallery-arrow { width: 55px !important; height: 55px !important; background-color: rgba(0,0,0,0.4) !important; border: 2px solid rgba(255,255,255,0.7) !important; }
+  .gallery-arrow span { font-size: 30px !important; }
   .rsvp-form-container { padding: 30px 20px; }
   .radio-options { flex-direction: column; gap: 10px; }
   .text-container { padding: 25px; }
@@ -303,50 +167,25 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
   .google-form-container { padding: 15px; }
   .google-form-container iframe { height: 600px; }
 }
-@media (max-width: 576px) {
-  .details-grid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
-  .detail-card { padding: 20px; }
-}
-@media (max-width: 480px) {
+@media (max-width: 390px) {
   .gallery-container { height: 585px; }
-  .caption { padding: 25px 15px 15px; }
+  .caption { padding: 25px 15px 15px; max-height: 60%; }
   .caption h3 { font-size: 1.2rem; }
-  .caption p { font-size: 0.85rem; max-height: 100px; }
-  .google-form-container iframe { height: 580px; }
-}
-@media (max-width: 380px) {
+  .caption p { font-size: 0.85rem; max-height: 150px; padding-right: 15px; }
+  .details-grid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
+  .detail-card { padding: 15px; }
   .details-section .content-container { padding: 70px 10px 20px; }
   h2 { font-size: 2rem; }
   h3 { font-size: 1.5rem; }
-  .detail-card { padding: 15px; }
   .detail-icon img { width: 40px; height: 40px; }
   .donation-section .section-intro { padding: 20px; font-size: 0.9rem; }
   .payment-card { padding: 15px; }
   .qr-code { width: 120px; height: 120px; }
   .hero-content { padding: 20px; }
   .section-heading h2 { font-size: 1.8rem; }
-}
-
-.mini-countdown {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    padding: 8px 0;
-    color: var(--primary-color);
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-top: 1px dashed rgba(0,0,0,0.1);
-    width: 100%;
-}
-
-.mini-countdown span {
-    display: inline-block;
-    margin: 0 2px;
-}
-
-.mini-countdown .count-value {
-    font-weight: bold;
-    font-size: 1rem;
-    color: var(--accent-color);
+  .google-form-container iframe { height: 580px; }
+  @supports (-webkit-touch-callout: none) {
+    .caption p { -webkit-overflow-scrolling: touch; padding-right: 20px; margin-right: -15px; }
+    .gallery-arrow { opacity: 1 !important; background-color: rgba(0,0,0,0.8) !important; border: 2px solid rgba(255,255,255,1) !important; }
+  }
 }
