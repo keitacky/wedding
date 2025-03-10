@@ -177,16 +177,21 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Navigation buttons
         if (prevButton && nextButton) {
-            prevButton.addEventListener('click', () => {
-                const activeIndex = getCurrentPhotoIndex();
-                const prevIndex = (activeIndex - 1 + galleryImages.length) % galleryImages.length;
-                changePhoto(prevIndex);
-            });
-            
-            nextButton.addEventListener('click', () => {
-                const activeIndex = getCurrentPhotoIndex();
-                const nextIndex = (activeIndex + 1) % galleryImages.length;
-                changePhoto(nextIndex);
+            // クリックイベントに加えて、タッチイベントを追加
+            ['click', 'touchstart'].forEach(eventType => {
+                prevButton.addEventListener(eventType, (e) => {
+                    e.preventDefault(); // デフォルトの動作を防止
+                    const activeIndex = getCurrentPhotoIndex();
+                    const prevIndex = (activeIndex - 1 + galleryImages.length) % galleryImages.length;
+                    changePhoto(prevIndex);
+                });
+                
+                nextButton.addEventListener(eventType, (e) => {
+                    e.preventDefault(); // デフォルトの動作を防止
+                    const activeIndex = getCurrentPhotoIndex();
+                    const nextIndex = (activeIndex + 1) % galleryImages.length;
+                    changePhoto(nextIndex);
+                });
             });
         }
         
