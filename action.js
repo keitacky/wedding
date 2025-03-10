@@ -222,23 +222,19 @@ document.addEventListener('DOMContentLoaded', function()  {
             });
             
             // iOS/タッチデバイス向け拡張機能
+            // iOSでのボタン表示保証
             if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-                galleryContainer.addEventListener('click', function(e) {
-                    if (e.target.closest('.gallery-arrow')) return;
-                    
-                    const rect = galleryContainer.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const width = rect.width;
-                    const currentIndex = getCurrentPhotoIndex();
-                    
-                    if (x < width / 2) {
-                        const prevIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-                        changePhoto(prevIndex);
-                    } else {
-                        const nextIndex = (currentIndex + 1) % galleryImages.length;
-                        changePhoto(nextIndex);
-                    }
-                });
+                if (prevButton && nextButton) {
+                    // ボタンの可視性を強制的に保証
+                    setTimeout(() => {
+                        prevButton.style.display = 'flex';
+                        nextButton.style.display = 'flex';
+                        prevButton.style.visibility = 'visible';
+                        nextButton.style.visibility = 'visible';
+                        prevButton.style.opacity = '1';
+                        nextButton.style.opacity = '1';
+                    }, 500);
+                }
             }
         }
     };
