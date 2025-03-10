@@ -608,6 +608,7 @@ p {
     margin-bottom: 15px;
 }
 
+/* キャプションをオーバーラップさせる */
 .caption {
     position: absolute;
     bottom: 0;
@@ -625,12 +626,22 @@ p {
     max-height: 30%;
     overflow-y: auto;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    text-align: left;
 }
 
 .caption h3 {
     margin-bottom: 5px;
     color: white;
     font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.caption p {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    max-height: 100px;
+    overflow-y: auto;
 }
 
 .gallery-controls {
@@ -684,7 +695,7 @@ p {
 /* スマートフォン対応 */
 @media (max-width: 768px) {
     .gallery-container {
-        height: 500px;
+        height: 450px;
     }
     
     .gallery-image img {
@@ -694,6 +705,16 @@ p {
     .caption {
         max-height: 35%;
         padding: 10px;
+        padding: 15px;
+    }
+    
+    .caption h3 {
+        font-size: 1.5rem;
+    }
+    
+    .caption p {
+        font-size: 0.9rem;
+        max-height: 80px;
     }
 }
 
@@ -701,10 +722,25 @@ p {
 @media (max-width: 480px) {
     .gallery-container {
         height: 450px;
+        height: 400px;
     }
     
     .gallery-image img {
         max-height: 55%;
+    }
+    
+    .caption {
+        padding: 12px;
+    }
+    
+    .caption h3 {
+        font-size: 1.3rem;
+        margin-bottom: 3px;
+    }
+    
+    .caption p {
+        font-size: 0.85rem;
+        max-height: 70px;
     }
 }
 
