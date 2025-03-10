@@ -555,18 +555,16 @@ p {
     }
 }
 
-/* Gallery Section */
+/* Gallery Section - 写真を大きく、キャプションをオーバーラップさせる */
 .photo-gallery {
     position: relative;
     margin: 40px 0;
     overflow: hidden;
 }
 
-/* 1. ギャラリーコンテナのサイズ変更 */
 .gallery-container {
     position: relative;
-    height: 600px; /* ここの値を変更すると全体の高さが変わります */
-    margin-bottom: 20px;
+    height: 700px; /* 高さを大きく調整 */
     width: 100%;
     max-width: 1000px;
     margin: 0 auto 20px;
@@ -579,33 +577,21 @@ p {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1s ease, transform 3s ease;
-    transform: scale(1.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    transition: opacity 0.8s ease;
 }
 
 .gallery-image.active {
     opacity: 1;
-    transform: scale(1);
     z-index: 1;
 }
 
-/* 2. 写真自体のサイズ調整 */
+/* 写真のサイズを最大化 */
 .gallery-image img {
-    width: 100%; /* または特定のピクセル値/パーセンテージに変更可能 */
-    height: auto; /* アスペクト比を維持 */
-    /* または特定の高さに固定したい場合: height: 500px; など */
-    object-fit: cover; /* 画像の切り抜き方法を指定 */
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* アスペクト比を維持しながら最大サイズで表示 */
     border-radius: 8px;
-    max-height: 65%; /* コンテナの65%までの高さ */
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain; /* アスペクト比を維持 */
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    margin-bottom: 15px;
 }
 
 /* キャプションをオーバーラップさせる */
@@ -614,33 +600,26 @@ p {
     bottom: 0;
     left: 0;
     width: 100%;
-    max-width: 600px; /* 最大幅 */
-    padding: 30px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    background: linear-gradient(transparent, rgba(0,0,0,0.8) 30%);
     color: white;
-    border-radius: 0 0 4px 4px;
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.92);
-    border-radius: 8px;
-    max-width: 90%;
-    max-height: 30%;
-    overflow-y: auto;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    border-radius: 0 0 8px 8px;
+    padding: 40px 30px 25px;
     text-align: left;
 }
 
 .caption h3 {
+    color: white !important;
+    font-size: 1.6rem;
     margin-bottom: 5px;
-    color: white;
-    font-size: 2rem;
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .caption p {
     color: rgba(255,255,255,0.9);
     font-size: 0.95rem;
+    margin-bottom: 5px;
     text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    max-height: 100px;
+    max-height: 120px;
     overflow-y: auto;
 }
 
@@ -649,7 +628,7 @@ p {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .dots-container {
@@ -672,19 +651,18 @@ p {
 }
 
 .gallery-arrow {
-    background-color: transparent;
-    border: none;
+    background-color: rgba(0,0,0,0.3);
     color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.5);
     width: 50px;
     height: 50px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .gallery-arrow:hover {
@@ -692,55 +670,37 @@ p {
     border-color: var(--primary-color);
 }
 
-/* スマートフォン対応 */
+/* レスポンシブ対応 */
 @media (max-width: 768px) {
     .gallery-container {
-        height: 450px;
-    }
-    
-    .gallery-image img {
-        max-height: 60%;
+        height: 550px;
     }
     
     .caption {
-        max-height: 35%;
-        padding: 10px;
-        padding: 15px;
+        padding: 30px 20px 20px;
     }
     
     .caption h3 {
-        font-size: 1.5rem;
-    }
-    
-    .caption p {
-        font-size: 0.9rem;
-        max-height: 80px;
+        font-size: 1.4rem;
     }
 }
 
-/* 小さいスクリーン向け */
 @media (max-width: 480px) {
     .gallery-container {
         height: 450px;
-        height: 400px;
-    }
-    
-    .gallery-image img {
-        max-height: 55%;
     }
     
     .caption {
-        padding: 12px;
+        padding: 25px 15px 15px;
     }
     
     .caption h3 {
-        font-size: 1.3rem;
-        margin-bottom: 3px;
+        font-size: 1.2rem;
     }
     
     .caption p {
         font-size: 0.85rem;
-        max-height: 70px;
+        max-height: 100px;
     }
 }
 
