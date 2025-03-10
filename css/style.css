@@ -262,6 +262,10 @@ p {
     color: white;
 }
 
+.details-section::before {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+}
+
 .compact-details {
     width: 100%;
 }
@@ -271,7 +275,7 @@ p {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     gap: 30px;
 }
 
@@ -333,39 +337,48 @@ p {
     font-size: 1.1rem;
 }
 
-/* Donation Section */
+/* Donation Section 修正 */
 .donation-section {
     margin-top: 60px;
     padding-top: 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 5;
 }
 
-.section-subheading {
-    text-align: center;
+.donation-section .section-subheading {
     margin-bottom: 30px;
 }
 
+.donation-section .section-subheading h3 {
+    color: white;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .donation-section .section-intro {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 25px 30px;
-    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 8px;
     color: var(--dark-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto 50px;
     font-style: italic;
     position: relative;
+    line-height: 1.8;
+    font-size: 1.1rem;
 }
 
 .donation-section .section-intro::before {
     content: '"';
     font-family: var(--font-primary);
-    font-size: 60px;
+    font-size: 80px;
     position: absolute;
-    top: -30px;
+    top: -35px;
     left: 15px;
     color: var(--primary-color);
-    opacity: 0.3;
+    opacity: 0.4;
 }
 
 .payment-options {
@@ -373,25 +386,31 @@ p {
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
+    margin-top: 30px;
 }
 
 .payment-card {
-    flex-basis: 350px;
+    flex: 0 0 auto;
+    width: calc(50% - 40px);
+    max-width: 350px;
+    min-width: 280px;
     text-align: center;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     color: var(--dark-color);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
 }
 
 .payment-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .payment-icon {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -405,12 +424,40 @@ p {
 }
 
 .qr-code {
-    max-width: 150px;
+    width: 150px;
+    height: 150px;
     margin: 20px auto 0;
     border: 1px solid #eee;
     border-radius: 8px;
-    padding: 5px;
+    padding: 8px;
     background: white;
+    object-fit: contain;
+}
+
+/* ディテールセクションの調整 */
+.details-main-container {
+    margin-bottom: 60px;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 992px) {
+    .details-main-container {
+        flex-direction: column;
+    }
+    
+    .details-grid, .countdown-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .countdown-container {
+        margin-top: 30px;
+    }
+    
+    .payment-card {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 /* Gallery Section */
