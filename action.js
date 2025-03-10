@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function()  {
-    // Page preloader - ensures images load completely
     const preloader = document.createElement('div');
     preloader.className = 'preloader';
     preloader.innerHTML = `
@@ -8,13 +7,11 @@ document.addEventListener('DOMContentLoaded', function()  {
     `;
     document.body.appendChild(preloader);
     
-    // Remove preloader when page is fully loaded
     window.addEventListener('load', () => {
         setTimeout(() => {
             preloader.classList.add('preloader-hidden');
             setTimeout(() => {
                 preloader.remove();
-                // ヒーローコンテンツを確実に表示
                 const heroContent = document.querySelector('.hero-content');
                 if(heroContent) {
                     heroContent.style.opacity = '1';
@@ -22,13 +19,11 @@ document.addEventListener('DOMContentLoaded', function()  {
                     heroContent.classList.add('animate-in');
                 }
                 
-                // フルスクリーンセクションの初期化
                 initFullScreenSections();
             }, 500);
         }, 800);
     });
 
-    // Enhanced navbar scroll effect
     const navbar = document.querySelector('.navbar');
     
     window.addEventListener('scroll', function() {
@@ -39,16 +34,13 @@ document.addEventListener('DOMContentLoaded', function()  {
         }
     });
 
-    // Full screen sections initialization
     function initFullScreenSections() {
         const sections = document.querySelectorAll('section');
         const totalSections = sections.length;
         
-        // セクション用のインジケーターは維持
         sections.forEach((section, index) => {
             section.setAttribute('data-index', index);
             
-            // Create navigation indicators
             const indicator = document.createElement('div');
             indicator.classList.add('section-indicator');
             indicator.setAttribute('data-section', index);
@@ -56,14 +48,12 @@ document.addEventListener('DOMContentLoaded', function()  {
             document.querySelector('.section-indicators').appendChild(indicator);
         });
         
-        // インジケーター作成関数は維持
         function createIndicators() {
             const indicatorsContainer = document.createElement('div');
             indicatorsContainer.className = 'section-indicators';
             document.body.appendChild(indicatorsContainer);
         }
         
-        // インジケーター更新関数は維持するが、スクロールに合わせて動作するよう変更
         function updateIndicators(index) {
             const indicators = document.querySelectorAll('.section-indicator');
             indicators.forEach((indicator, i) => {
@@ -75,12 +65,9 @@ document.addEventListener('DOMContentLoaded', function()  {
             });
         }
         
-        // スクロール位置に応じてインジケーターを更新する
         window.addEventListener('scroll', function() {
-            // 現在のスクロール位置を取得
             const scrollPosition = window.pageYOffset + window.innerHeight / 2;
             
-            // 最も近いセクションを見つける
             let closest = null;
             let closestDistance = Infinity;
             
@@ -100,53 +87,40 @@ document.addEventListener('DOMContentLoaded', function()  {
             }
         });
         
-        // インジケーターのクリックイベントは通常のスクロールに変更
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('section-indicator') || e.target.parentElement.classList.contains('section-indicator')) {
                 const target = e.target.classList.contains('section-indicator') ? e.target : e.target.parentElement;
                 const index = parseInt(target.getAttribute('data-section'));
                 const targetSection = sections[index];
                 
-                // スムーススクロールで対象セクションへ移動
                 targetSection.scrollIntoView({
                     behavior: 'smooth'
                 });
             }
         });
         
-        // ★★★ 以下のイベントリスナーを削除 ★★★
-        // wheel, keydown, touchstartなどのスクロールスナップ関連のイベントは削除
-        
-        // 初期インジケーターの設定
         updateIndicators(0);
     }
 
-    // Enhanced parallax effect for background images
     window.addEventListener('scroll', () => {
         const scrollPosition = window.pageYOffset;
         const viewportHeight = window.innerHeight;
         
-        // Apply enhanced parallax to all sections with background images
         document.querySelectorAll('.parallax-section, .hero-section, .gallery-section, .rsvp-section').forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const distanceFromTop = scrollPosition - sectionTop;
             
-            // Only apply effect when section is in viewport
             if (distanceFromTop > -viewportHeight && distanceFromTop < sectionHeight) {
-                // Calculate parallax amount based on scroll position
                 const speed = section.classList.contains('hero-section') ? 0.7 : 0.5;
                 const yPos = -(distanceFromTop * speed);
                 
-                // Apply to section background
                 if (section.style.backgroundImage) {
                     section.style.backgroundPosition = `center ${yPos}px`;
                 }
                 
-                // Also apply to any section-bg elements
                 const bg = section.querySelector('.section-bg');
                 if (bg) {
-                    // Create more dramatic parallax for section backgrounds
                     const scale = 1 + Math.abs(distanceFromTop / viewportHeight * 0.1);
                     const translateY = distanceFromTop * 0.15;
                     bg.style.transform = `scale(${scale}) translateY(${translateY}px)`;
@@ -155,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function()  {
         });
     });
 
-    // Gallery functionality (keeping existing code)
     const galleryInit = () => {
         const galleryImages = document.querySelectorAll('.gallery-image');
         const dotsContainer = document.querySelector('.dots-container');
@@ -164,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         if (!galleryImages.length) return;
         
-        // Create dots for navigation
         if (galleryImages.length && dotsContainer) {
             galleryImages.forEach((_, index) => {
                 const dot = document.createElement('div');
@@ -175,27 +147,28 @@ document.addEventListener('DOMContentLoaded', function()  {
             });
         }
         
-        // Navigation buttons
         if (prevButton && nextButton) {
-            // クリックイベントに加えて、タッチイベントを追加
-            ['click', 'touchstart'].forEach(eventType => {
+            const events = ['click', 'touchstart', 'touchend'];
+            
+            events.forEach(eventType => {
                 prevButton.addEventListener(eventType, (e) => {
-                    e.preventDefault(); // デフォルトの動作を防止
+                    e.preventDefault();
+                    e.stopPropagation();
                     const activeIndex = getCurrentPhotoIndex();
                     const prevIndex = (activeIndex - 1 + galleryImages.length) % galleryImages.length;
                     changePhoto(prevIndex);
-                });
+                }, { passive: false });
                 
                 nextButton.addEventListener(eventType, (e) => {
-                    e.preventDefault(); // デフォルトの動作を防止
+                    e.preventDefault();
+                    e.stopPropagation();
                     const activeIndex = getCurrentPhotoIndex();
                     const nextIndex = (activeIndex + 1) % galleryImages.length;
                     changePhoto(nextIndex);
-                });
+                }, { passive: false });
             });
         }
         
-        // Helper function to get current active photo index
         function getCurrentPhotoIndex() {
             let activeIndex = 0;
             galleryImages.forEach((image, index) => {
@@ -206,7 +179,6 @@ document.addEventListener('DOMContentLoaded', function()  {
             return activeIndex;
         }
         
-        // Change photo function with enhanced animation
         function changePhoto(index) {
             const activeImage = document.querySelector('.gallery-image.active');
             const targetImage = galleryImages[index];
@@ -229,14 +201,12 @@ document.addEventListener('DOMContentLoaded', function()  {
             }
         }
         
-        // Auto change photos every 6 seconds
         let galleryInterval = setInterval(() => {
             const activeIndex = getCurrentPhotoIndex();
             const nextIndex = (activeIndex + 1) % galleryImages.length;
             changePhoto(nextIndex);
         }, 6000);
         
-        // Pause auto-rotation when user interacts with the gallery
         const galleryContainer = document.querySelector('.photo-gallery');
         if (galleryContainer) {
             galleryContainer.addEventListener('mouseenter', () => {
@@ -250,10 +220,29 @@ document.addEventListener('DOMContentLoaded', function()  {
                     changePhoto(nextIndex);
                 }, 6000);
             });
+            
+            // iOS/タッチデバイス向け拡張機能
+            if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                galleryContainer.addEventListener('click', function(e) {
+                    if (e.target.closest('.gallery-arrow')) return;
+                    
+                    const rect = galleryContainer.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const width = rect.width;
+                    const currentIndex = getCurrentPhotoIndex();
+                    
+                    if (x < width / 2) {
+                        const prevIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+                        changePhoto(prevIndex);
+                    } else {
+                        const nextIndex = (currentIndex + 1) % galleryImages.length;
+                        changePhoto(nextIndex);
+                    }
+                });
+            }
         }
     };
 
-    // Countdown timer (keeping existing code)
     const weddingDate = new Date('2025-05-26T14:00:00');
     const timer = document.getElementById('timer');
     
@@ -286,10 +275,8 @@ document.addEventListener('DOMContentLoaded', function()  {
         setInterval(updateCountdown, 1000);
     }
     
-    // Initialize gallery after a short delay to ensure DOM is ready
     setTimeout(galleryInit, 100);
     
-    // Smooth scroll for navigation links
     const navLinks = document.querySelectorAll('.navbar a, .btn');
     navLinks.forEach(link => {
         link.addEventListener('click', e => {
@@ -299,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function()  {
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // 単純にスムーススクロールで移動
                     const navHeight = navbar.offsetHeight;
                     window.scrollTo({
                         top: targetElement.offsetTop - navHeight,
@@ -310,7 +296,6 @@ document.addEventListener('DOMContentLoaded', function()  {
         });
     });
     
-    // Custom event listener for section navigation
     document.addEventListener('navigateToSection', (e) => {
         const sectionIndex = e.detail.sectionIndex;
         const sections = document.querySelectorAll('section');
@@ -323,7 +308,6 @@ document.addEventListener('DOMContentLoaded', function()  {
         }
     });
 
-    // RSVPフォーム送信処理を追加
     const form = document.getElementById('rsvp-form');
     const formSuccess = document.getElementById('form-success');
     const formError = document.getElementById('form-error');
@@ -333,17 +317,14 @@ document.addEventListener('DOMContentLoaded', function()  {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // フォームデータを取得
             const formData = new FormData(form);
             const action = form.getAttribute('action');
             
-            // 送信中の表示
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerText;
             submitBtn.innerText = 'Sending...';
             submitBtn.disabled = true;
             
-            // Formspreeにデータ送信
             fetch(action, {
                 method: 'POST',
                 body: formData,
@@ -358,26 +339,22 @@ document.addEventListener('DOMContentLoaded', function()  {
                 throw new Error('Network response was not ok.');
             })
             .then(data => {
-                // 成功
                 form.style.display = 'none';
                 formSuccess.style.display = 'block';
                 formError.style.display = 'none';
             })
             .catch(error => {
-                // エラー
                 console.error('Error:', error);
                 form.style.display = 'none';
                 formError.style.display = 'block';
                 formSuccess.style.display = 'none';
             })
             .finally(() => {
-                // ボタンを元に戻す
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
             });
         });
         
-        // 「もう一度試す」ボタンの処理
         if (tryAgainBtn) {
             tryAgainBtn.addEventListener('click', function() {
                 form.style.display = 'flex';
