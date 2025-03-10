@@ -74,13 +74,36 @@ p { margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
     overflow: visible;
     padding-bottom: 70px;
 }
-.gallery-container { position: relative; height: 700px; width: 100%; max-width: 1000px; margin: 0 auto 20px; }
+.gallery-container { 
+    position: relative; 
+    height: 910px; /* 元の700pxから30%増加 */
+    width: 100%; 
+    max-width: 1000px; 
+    margin: 0 auto 20px; 
+}
 .gallery-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
 .gallery-image.active { opacity: 1; z-index: 1; }
 .gallery-image img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-.caption { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.85) 20%); color: white; border-radius: 0 0 8px 8px; padding: 30px 25px 15px; text-align: left; max-height: 35%; }
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85) 20%);
+    color: white;
+    border-radius: 0 0 8px 8px;
+    padding: 35px 25px 20px;
+    text-align: left;
+    max-height: 40%; /* 少し高さを増やす */
+}
 .caption h3 { color: white !important; font-size: 1.4rem; margin-bottom: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); line-height: 1.2; }
-.caption p { color: rgba(255,255,255,0.9); font-size: 0.85rem; margin-bottom: 3px; text-shadow: 0 1px 3px rgba(0,0,0,0.7); max-height: 100px; overflow-y: auto; line-height: 1.4; }
+.caption p {
+    max-height: 150px; /* より多くのテキストを表示可能に */
+    overflow-y: auto;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
 .gallery-controls {
     display: flex;
     justify-content: center;
@@ -243,7 +266,7 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
   .navbar { padding: 15px 20px; }
   .nav-links { display: none; }
   .content-container { padding: 40px 20px; }
-  .gallery-container { height: 550px; }
+  .gallery-container { height: 715px; }
   .section-indicators { right: 10px; }
   .section-indicator { width: 8px; height: 8px; }
   .details-grid { grid-template-columns: 1fr; gap: 15px; }
@@ -271,7 +294,7 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
   .detail-card { padding: 20px; }
 }
 @media (max-width: 480px) {
-  .gallery-container { height: 450px; }
+  .gallery-container { height: 585px; }
   .caption { padding: 25px 15px 15px; }
   .caption h3 { font-size: 1.2rem; }
   .caption p { font-size: 0.85rem; max-height: 100px; }
