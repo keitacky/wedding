@@ -14,10 +14,15 @@ document.addEventListener('DOMContentLoaded', function()  {
             preloader.classList.add('preloader-hidden');
             setTimeout(() => {
                 preloader.remove();
-                // Add animation to hero content after preloader is gone
-                document.querySelector('.hero-content').classList.add('animate-in');
+                // ヒーローコンテンツを確実に表示
+                const heroContent = document.querySelector('.hero-content');
+                if(heroContent) {
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                    heroContent.classList.add('animate-in');
+                }
                 
-                // Initialize full screen sections after preloader is gone
+                // フルスクリーンセクションの初期化
                 initFullScreenSections();
             }, 500);
         }, 800);
@@ -113,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function()  {
             // Reset scroll lock after animation completes
             setTimeout(() => {
                 isScrolling = false;
-            }, 1000);
+            }, 600);  // 1000msから600msに短縮
         }
         
         // Animate section entrance
@@ -187,8 +192,8 @@ document.addEventListener('DOMContentLoaded', function()  {
             // PC向け設定
             const observerOptions = {
                 root: null,
-                rootMargin: '-50% 0px',
-                threshold: 0
+                rootMargin: '-20% 0px',
+                threshold: 0.1
             };
         }
         

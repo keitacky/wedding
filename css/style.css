@@ -238,20 +238,18 @@ p {
     position: relative;
     z-index: 2;
     max-width: 800px;
-    padding: 0 20px;
     text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
-    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 1 !important; /* 常に表示 */
+    transform: translateY(0) !important; /* 位置修正 */
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 40px;
     border-radius: 15px;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(5px);
 }
 
 .hero-content.animate-in {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .hero-content h1,
@@ -260,6 +258,26 @@ p {
 .section-subheading h3,
 .story-content p {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content h1,
+.hero-content .wedding-date,
+.section-heading h2,
+.parallax-section .text-container p {
+    color: #FFFFFF !important;
+}
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+    margin-bottom: 1rem;
+}
+
+.hero-content .wedding-date {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
 .wedding-date {
@@ -281,6 +299,12 @@ p {
     background-color: rgba(0, 0, 0, 0.3);
     padding: 20px;
     border-radius: 8px;
+}
+
+.section-heading h2,
+.story-content p {
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
 }
 
 /* Details Section */
