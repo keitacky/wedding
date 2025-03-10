@@ -1,196 +1,196 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kei & Maddy | Wedding Celebration</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+document.addEventListener('DOMContentLoaded', function()  {
+    // Page preloader - ensures images load completely
+    const preloader = document.createElement('div');
+    preloader.className = 'preloader';
+    preloader.innerHTML = `ontent="width=device-width, initial-scale=1.0">
+        <div class="spinner"></div>lebration</title>
+        <div class="preloader-text">K & M</div>>
+    `;ink rel="preconnect" href="https://fonts.googleapis.com">
+    document.body.appendChild(preloader);fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <a href="#" class="navbar-brand">K & M</a>
-        <div class="nav-links">
-            <a href="#welcome">Home</a>
-            <a href="#story">Our Story</a>
-            <a href="#details">Details</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#rsvp">RSVP</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="welcome" class="hero-section full-screen">
-        <div class="section-bg" style="background-image: url('images/hero-bg.jpg');"></div>
-        <div class="hero-content">
-            <h1>Kei & Maddy</h1>
-            <p class="wedding-date">May 26, 2025</p>
-            <a href="#details" class="btn btn-primary">Our Wedding</a>
-        </div>
-    </section>
-
-    <!-- Story Section -->
-    <section id="story" class="full-screen parallax-section">
-        <div class="section-bg" style="background-image: url('images/story-bg.jpg');"></div>
-        <div class="content-container">
-            <div class="section-heading">
-                <h2>Our Love Story</h2>
-                <div class="divider"><span></span></div>
-            </div>
-            <div class="story-content">
-                <p>Our journey together began with a chance meeting that would forever change our lives. What started as a simple conversation blossomed into a deep connection that only grows stronger with each passing day.</p>
-                <a href="#gallery" class="btn">View Our Journey</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Details Section -->
-    <section id="details" class="details-section full-screen">
-        <div class="section-bg" style="background-image: url('images/details-bg.jpg');"></div>
-        <div class="content-container">
-            <div class="section-heading">
-                <h2>Wedding Details</h2>
-                <div class="divider"><span></span></div>
-            </div>
-            
-            <!-- Donation Section を先に配置 -->
-            <div class="donation-section">
-                <div class="section-subheading">
-                    <h3>Donation</h3>
-                    <div class="divider light"><span></span></div>
-                </div>
-                <p class="section-intro">Your presence at our wedding is the greatest gift of all. If you wish to support our new beginning, we would be honored to receive a contribution:</p>
+    // Remove preloader when page is fully loaded
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            preloader.classList.add('preloader-hidden');
+            setTimeout(() => {bar-brand">K & M</a>
+                preloader.remove();
+                // ヒーローコンテンツを確実に表示e</a>
+                const heroContent = document.querySelector('.hero-content');
+                if(heroContent) {tails</a>
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                    heroContent.classList.add('animate-in');
+                }
                 
-                <div class="payment-options">
-                    <div class="payment-card no-animation">
-                        <div class="payment-icon">
-                            <img src="images/venmo-logo.png" alt="Venmo">
-                        </div>
-                        <h3>Venmo</h3>
-                        <p>@your-venmo-username</p>
-                        <img src="images/venmo-qr.png" alt="Venmo QR Code" class="qr-code">
-                    </div>
-                    
-                    <div class="payment-card no-animation">
-                        <div class="payment-icon">
-                            <img src="images/zelle-logo.png" alt="Zelle">
-                        </div>
-                        <h3>Zelle</h3>
-                        <p>Email: your-email@example.com</p>
-                        <p>Phone: (123) 456-7890</p>
-                    </div>
-                </div>
+                // フルスクリーンセクションの初期化
+                initFullScreenSections();tion full-screen">
+            }, 500);section-bg" style="background-image: url('images/hero-bg.jpg');"></div>
+        }, 800);ss="hero-content">
+    });     <h1>Kei & Maddy</h1>
+            <p class="wedding-date">May 26, 2025</p>
+    // Enhanced navbar scroll effect="btn btn-primary">Our Wedding</a>
+    const navbar = document.querySelector('.navbar');
+    </section>
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');rallax-section">
+        } else {ss="section-bg" style="background-image: url('images/story-bg.jpg');"></div>
+            navbar.classList.remove('scrolled');
+        }   <div class="section-heading">
+    });         <h2>Our Love Story</h2>
+                <div class="divider"><span></span></div>
+    // Full screen sections initialization
+    function initFullScreenSections() {
+        const sections = document.querySelectorAll('section');eting that would forever change our lives. What started as a simple conversation blossomed into a deep connection that only grows stronger with each passing day.</p>
+        const totalSections = sections.length;>View Our Journey</a>
             </div>
+        // セクション用のインジケーターは維持
+        sections.forEach((section, index) => {
+            section.setAttribute('data-index', index);
+            ails Section -->
+            // Create navigation indicatorsction full-screen">
+            const indicator = document.createElement('div');('images/details-bg.jpg');"></div>
+            indicator.classList.add('section-indicator');
+            indicator.setAttribute('data-section', index);
+            document.querySelector('.section-indicators') || createIndicators();
+            document.querySelector('.section-indicators').appendChild(indicator);
+        }); </div>
             
-            <!-- その後に詳細情報 -->
-            <div class="details-main-container">
-                <div class="details-grid">
+        // インジケーター作成関数は維持 Section を先に配置 -->
+        function createIndicators() {ion">
+            const indicatorsContainer = document.createElement('div');
+            indicatorsContainer.className = 'section-indicators';
+            document.body.appendChild(indicatorsContainer);></div>
+        }       </div>
+                <p class="section-intro">Your presence at our wedding is the greatest gift of all. If you wish to support our new beginning, we would be honored to receive a contribution:</p>
+        // インジケーター更新関数は維持するが、スクロールに合わせて動作するよう変更
+        function updateIndicators(index) {s">
+            const indicators = document.querySelectorAll('.section-indicator');
+            indicators.forEach((indicator, i) => {
+                if (i === index) {rc="images/venmo-logo.png" alt="Venmo">
+                    indicator.classList.add('active');
+                } else {<h3>Venmo</h3>
+                    indicator.classList.remove('active');
+                }       <img src="images/venmo-qr.png" alt="Venmo QR Code" class="qr-code">
+            });     </div>
+        }           
+                    <div class="payment-card no-animation">
+        // スクロール位置に応じてインジケーターを更新する="payment-icon">
+        window.addEventListener('scroll', function() {o.png" alt="Zelle">
+            // 現在のスクロール位置を取得v>
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+                        <p>Email: your-email@example.com</p>
+            // 最も近いセクションを見つけるone: (123) 456-7890</p>
+            let closest = null;
+            let closestDistance = Infinity;
+            </div>
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const distance = Math.abs(scrollPosition - (sectionTop + sectionHeight / 2));
                     <div class="detail-card no-animation">
-                        <div class="detail-icon">
-                            <img src="images/calendar-icon.png" alt="Date">
-                        </div>
-                        <h3>When</h3>
-                        <p>May 26, 2025<br>1:00 PM</p>
+                if (distance < closestDistance) {
+                    closest = index;="images/calendar-icon.png" alt="Date">
+                    closestDistance = distance;
+                }       <h3>When</h3>
+            });         <p>May 26, 2025<br>1:00 PM</p>
                     </div>
-                    <div class="detail-card no-animation">
-                        <div class="detail-icon">
-                            <img src="images/location-icon.png" alt="Location">
-                        </div>
+            if (closest !== null) {ail-card no-animation">
+                updateIndicators(closest);-icon">
+            }               <img src="images/location-icon.png" alt="Location">
+        });             </div>
                         <h3>Where</h3>
-                        <p>
-                            The Villa<br>
-                            14617 County Road 192<br>
-                            Tyler, TX<br>
-                            <a href="https://www.thevillatyler.com/" target="_blank" class="venue-link">View Venue</a>
-                        </p>
+        // インジケーターのクリックイベントは通常のスクロールに変更
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('section-indicator') || e.target.parentElement.classList.contains('section-indicator')) {
+                const target = e.target.classList.contains('section-indicator') ? e.target : e.target.parentElement;
+                const index = parseInt(target.getAttribute('data-section'));"_blank" class="venue-link">View Venue</a>
+                const targetSection = sections[index];
                     </div>
-                    <div class="detail-card no-animation">
-                        <div class="detail-icon">
-                            <img src="images/dress-icon.png" alt="Dress Code">
-                        </div>
-                        <h3>Attire</h3>
-                        <p>Formal<br>Black Tie Optional</p>
+                // スムーススクロールで対象セクションへ移動card no-animation">
+                targetSection.scrollIntoView({n">
+                    behavior: 'smooth'images/dress-icon.png" alt="Dress Code">
+                });     </div>
+            }           <h3>Attire</h3>
+        });             <p>Formal<br>Black Tie Optional</p>
                     </div>
-                </div>
-            </div>
+        // ★★★ 以下のイベントリスナーを削除 ★★★
+        // wheel, keydown, touchstartなどのスクロールスナップ関連のイベントは削除
         </div>
-    </section>
-
-    <!-- Gallery Section -->
+        // 初期インジケーターの設定
+        updateIndicators(0);
+    }!-- Gallery Section -->
     <section id="gallery" class="full-screen gallery-section">
-        <div class="section-bg" style="background-image: url('images/gallery-bg.jpg');"></div>
-        <div class="content-container">
-            <div class="section-heading light">
-                <h2>Our Moments</h2>
+    // Enhanced parallax effect for background imagesge: url('images/gallery-bg.jpg');"></div>
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.pageYOffset;
+        const viewportHeight = window.innerHeight;
                 <div class="divider light"><span></span></div>
-            </div>
-            <div class="photo-gallery">
-                <div class="gallery-container">
-                    <div class="gallery-image active" data-index="0">
-                        <img src="images/photo1.jpg" alt="How we met">
+        // Apply enhanced parallax to all sections with background images
+        document.querySelectorAll('.parallax-section, .hero-section, .gallery-section, .rsvp-section').forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;ata-index="0">
+            const distanceFromTop = scrollPosition - sectionTop; met">
                         <div class="caption">
-                            <h3>How We Met</h3>
-                            <p>The day our paths crossed for the first time.</p>
-                        </div>
-                    </div>
-                    <div class="gallery-image" data-index="1">
+            // Only apply effect when section is in viewport
+            if (distanceFromTop > -viewportHeight && distanceFromTop < sectionHeight) {
+                // Calculate parallax amount based on scroll position
+                const speed = section.classList.contains('hero-section') ? 0.7 : 0.5;
+                const yPos = -(distanceFromTop * speed);x="1">
                         <img src="images/photo2.jpg" alt="First date">
-                        <div class="caption">
-                            <h3>Our First Date</h3>
-                            <p>A memorable evening at the waterfront.</p>
-                        </div>
+                // Apply to section background
+                if (section.style.backgroundImage) {
+                    section.style.backgroundPosition = `center ${yPos}px`;
+                }       </div>
                     </div>
-                    <div class="gallery-image" data-index="2">
-                        <img src="images/photo3.jpg" alt="The proposal">
-                        <div class="caption">
-                            <h3>The Proposal</h3>
-                            <p>When "will you?" became "I do."</p>
-                        </div>
-                    </div>
-                    <div class="gallery-image" data-index="3">
-                        <img src="images/photo4.jpg" alt="Engagement">
-                        <div class="caption">
-                            <h3>Our Engagement</h3>
+                // Also apply to any section-bg elementsx="2">
+                const bg = section.querySelector('.section-bg');oposal">
+                if (bg) {div class="caption">
+                    // Create more dramatic parallax for section backgrounds
+                    const scale = 1 + Math.abs(distanceFromTop / viewportHeight * 0.1);
+                    const translateY = distanceFromTop * 0.15;
+                    bg.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+                }   <div class="gallery-image" data-index="3">
+            }           <img src="images/photo4.jpg" alt="Engagement">
+        });             <div class="caption">
+    });                     <h3>Our Engagement</h3>
                             <p>Celebrating our commitment to forever.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-controls">
-                    <button id="prev-photo" class="gallery-arrow"><span>&lt;</span></button>
-                    <div class="dots-container"></div>
+    // Gallery functionality (keeping existing code)
+    const galleryInit = () => {
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        const dotsContainer = document.querySelector('.dots-container');
+        const prevButton = document.getElementById('prev-photo');><span>&lt;</span></button>
+        const nextButton = document.getElementById('next-photo');
                     <button id="next-photo" class="gallery-arrow"><span>&gt;</span></button>
-                </div>
+        if (!galleryImages.length) return;
             </div>
-        </div>
-    </section>
-
-    <!-- RSVP Section -->
-    <section id="rsvp" class="full-screen rsvp-section">
-        <div class="section-bg" style="background-image: url('images/rsvp-bg.jpg');"></div>
-        <div class="content-container">
-            <div class="section-heading light">
-                <h2>Join Us</h2>
-                <div class="divider light"><span></span></div>
+        // Create dots for navigation
+        if (galleryImages.length && dotsContainer) {
+            galleryImages.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot'); rsvp-section">
+                if (index === 0) dot.classList.add('active');'images/rsvp-bg.jpg');"></div>
+                dot.addEventListener('click', () => changePhoto(index));
+                dotsContainer.appendChild(dot);
+            }); <h2>Join Us</h2>
+        }       <div class="divider light"><span></span></div>
             </div>
-            <p class="section-intro light">We hope you can join us for our special day. Please RSVP by May 1, 2025.</p>
-            <div id="rsvp-form" class="rsvp-form-container">
-                <!-- Form will be dynamically generated with JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">K & M</div>
-            <p>Looking forward to celebrating with you</p>
-            <p class="copyright">&copy; 2025 Kei & Maddy</p>
-        </div>
-    </footer>
-
-    <script src="action.js"></script>
-</body>
-</html>
+        // Navigation buttons-intro light">We hope you can join us for our special day. Please RSVP by May 1, 2025.</p>
+        if (prevButton && nextButton) {rsvp-form-container">
+            prevButton.addEventListener('click', () => {with JavaScript -->
+                const activeIndex = getCurrentPhotoIndex();
+                const prevIndex = (activeIndex - 1 + galleryImages.length) % galleryImages.length;
+                changePhoto(prevIndex);
+            });
+            ter -->
+            nextButton.addEventListener('click', () => {
+                const activeIndex = getCurrentPhotoIndex();
+                const nextIndex = (activeIndex + 1) % galleryImages.length;
+                changePhoto(nextIndex);rating with you</p>
+            });class="copyright">&copy; 2025 Kei & Maddy</p>
+        }/div>
+        oter>
+        // Helper function to get current active photo index
+        function getCurrentPhotoIndex() {
+            let activeIndex = 0;
+            galleryImages.forEach((image, index) => {                if (image.classList.contains('active')) {                    activeIndex = index;                }            });            return activeIndex;        }                // Change photo function with enhanced animation        function changePhoto(index) {            const activeImage = document.querySelector('.gallery-image.active');            const targetImage = galleryImages[index];                        if (activeImage) {                activeImage.classList.add('fade-out');                                setTimeout(() => {                    galleryImages.forEach((image) => {                        image.classList.remove('active', 'fade-out');                    });                    targetImage.classList.add('active');                                        const dots = document.querySelectorAll('.dot');                    dots.forEach((dot) => dot.classList.remove('active'));                    dots[index].classList.add('active');                }, 300);            } else {                targetImage.classList.add('active');            }        }                // Auto change photos every 6 seconds        let galleryInterval = setInterval(() => {            const activeIndex = getCurrentPhotoIndex();            const nextIndex = (activeIndex + 1) % galleryImages.length;            changePhoto(nextIndex);        }, 6000);                // Pause auto-rotation when user interacts with the gallery        const galleryContainer = document.querySelector('.photo-gallery');        if (galleryContainer) {            galleryContainer.addEventListener('mouseenter', () => {                clearInterval(galleryInterval);            });                        galleryContainer.addEventListener('mouseleave', () => {                galleryInterval = setInterval(() => {                    const activeIndex = getCurrentPhotoIndex();                    const nextIndex = (activeIndex + 1) % galleryImages.length;                    changePhoto(nextIndex);                }, 6000);            });        }    };    // RSVP form (keeping existing code)    const rsvpSection = document.getElementById('rsvp-form');        if (rsvpSection) {        const rsvpForm = document.createElement('form');        rsvpForm.innerHTML = `            <div class="form-group">                <label for="name">Your Name</label>                <input type="text" id="name" name="name" required>            </div>            <div class="form-group">                <label for="email">Email Address</label>                <input type="email" id="email" name="email" required>            </div>            <div class="form-group">                <label>Will you be attending?</label>                <div class="radio-group">                    <input type="radio" id="attending-yes" name="attending" value="yes" required>                    <label for="attending-yes">Yes</label>                    <input type="radio" id="attending-no" name="attending" value="no">                    <label for="attending-no">No</label>                </div>            </div>            <div class="form-group">                <label for="guests">Number of Guests</label>                <input type="number" id="guests" name="guests" min="0" value="0">            </div>            <div class="form-group">                <label for="message">Message</label>                <textarea id="message" name="message" rows="4"></textarea>            </div>            <button type="submit">Send RSVP</button>        `;                rsvpSection.appendChild(rsvpForm);                // Form submission handler        rsvpForm.addEventListener('submit', function(e) {            e.preventDefault();                        // Display message on form submission            const formData = new FormData(rsvpForm);            let responseMessage = document.createElement('div');            responseMessage.className = 'response-message';            responseMessage.innerHTML = `                <h3>Thank you, ${formData.get('name')}!</h3>                <p>We have received your RSVP.</p>            `;                        rsvpForm.style.display = 'none';            rsvpSection.appendChild(responseMessage);        });    }    // Countdown timer (keeping existing code)    const weddingDate = new Date('2025-05-26T14:00:00');    const timer = document.getElementById('timer');        function updateCountdown() {        if (!timer) return;                const now = new Date();        const diff = weddingDate - now;                if (diff <= 0) {            timer.innerHTML = "<span>It's our wedding day!</span>";            return;        }                const days = Math.floor(diff / (1000 * 60 * 60 * 24));        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));        const seconds = Math.floor((diff % (1000 * 60)) / 1000);                timer.innerHTML = `            <span>${days}<br>Days</span>             <span>${hours}<br>Hours</span>             <span>${minutes}<br>Minutes</span>             <span>${seconds}<br>Seconds</span>        `;    }        if (timer) {        updateCountdown();        setInterval(updateCountdown, 1000);    }        // Initialize gallery after a short delay to ensure DOM is ready    setTimeout(galleryInit, 100);        // Smooth scroll for navigation links    const navLinks = document.querySelectorAll('.navbar a, .btn');    navLinks.forEach(link => {        link.addEventListener('click', e => {            if (link.getAttribute('href').startsWith('#')) {                e.preventDefault();                const targetId = link.getAttribute('href');                const targetElement = document.querySelector(targetId);                                if (targetElement) {                    // 単純にスムーススクロールで移動                    const navHeight = navbar.offsetHeight;                    window.scrollTo({                        top: targetElement.offsetTop - navHeight,                        behavior: 'smooth'                    });                }            }        });    });        // Custom event listener for section navigation    document.addEventListener('navigateToSection', (e) => {        const sectionIndex = e.detail.sectionIndex;        const sections = document.querySelectorAll('section');                if (sections.length > sectionIndex) {            window.scrollTo({                top: sections[sectionIndex].offsetTop,                behavior: 'smooth'            });        }    });});
