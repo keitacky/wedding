@@ -17,6 +17,9 @@
 html {
     scroll-behavior: smooth;
     height: 100%;
+    scroll-snap-type: none !important; /* スクロールスナップを無効化 */
+    overflow-y: auto !important;
+    height: auto !important;
 }
 
 body {
@@ -25,6 +28,9 @@ body {
     color: var(--dark-color);
     overflow-x: hidden;
     min-height: 100%;
+    scroll-snap-type: none !important; /* スクロールスナップを無効化 */
+    overflow-y: auto !important;
+    height: auto !important;
 }
 
 /* Typography */
@@ -107,6 +113,8 @@ p {
     align-items: center;
     justify-content: center;
     padding: 80px 0;  /* 上下に余裕を持たせる */
+    scroll-snap-align: none;
+    padding: 100px 0;
 }
 
 .content-container {
@@ -375,6 +383,10 @@ p {
     opacity: 1 !important;
     transform: translateY(0) !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.countdown-container h3 {
+    display: none;
 }
 
 .countdown {

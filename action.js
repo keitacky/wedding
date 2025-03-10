@@ -174,8 +174,14 @@ document.addEventListener('DOMContentLoaded', function()  {
         }
         
         // Set up intersection observer to detect which section is in view
-        // モバイル最適化
         const isMobile = window.innerWidth <= 768;
+
+        // 共通の observer オプションを設定
+        const observerOptions = {
+            root: null,
+            rootMargin: isMobile ? '-10% 0px' : '-20% 0px',
+            threshold: 0.1
+        };
 
         // モバイルではスクロールスナップを無効化
         if (isMobile) {
@@ -183,18 +189,10 @@ document.addEventListener('DOMContentLoaded', function()  {
             document.documentElement.style.scrollBehavior = 'auto';
             
             // スクロール処理を軽量化
-            const sections = document.querySelectorAll('section');
             sections.forEach(section => {
                 section.style.minHeight = 'auto';
                 section.style.height = 'auto';
             });
-        } else {
-            // PC向け設定
-            const observerOptions = {
-                root: null,
-                rootMargin: '-20% 0px',
-                threshold: 0.1
-            };
         }
         
         const sectionObserver = new IntersectionObserver((entries) => {
@@ -239,9 +237,6 @@ document.addEventListener('DOMContentLoaded', function()  {
                     }
                 }, 50);
             }, { passive: true });
-        } else {
-            // モバイルではスクロール動作を無効化
-            window.removeEventListener('wheel', wheelHandler);
         }
         
         // Handle key events
