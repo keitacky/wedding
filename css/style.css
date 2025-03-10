@@ -562,9 +562,10 @@ p {
     overflow: hidden;
 }
 
+/* 1. ギャラリーコンテナのサイズ変更 */
 .gallery-container {
     position: relative;
-    height: 600px;
+    height: 600px; /* ここの値を変更すると全体の高さが変わります */
     margin-bottom: 20px;
 }
 
@@ -584,11 +585,13 @@ p {
     transform: scale(1);
 }
 
+/* 2. 写真自体のサイズ調整 */
 .gallery-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+    width: 100%; /* または特定のピクセル値/パーセンテージに変更可能 */
+    height: auto; /* アスペクト比を維持 */
+    /* または特定の高さに固定したい場合: height: 500px; など */
+    object-fit: cover; /* 画像の切り抜き方法を指定 */
+    border-radius: 8px;
 }
 
 .caption {
@@ -596,6 +599,7 @@ p {
     bottom: 0;
     left: 0;
     width: 100%;
+    max-width: 600px; /* 最大幅 */
     padding: 30px;
     background: linear-gradient(transparent, rgba(0,0,0,0.8));
     color: white;
