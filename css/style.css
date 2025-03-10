@@ -98,11 +98,19 @@ p { margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
 }
 .caption h3 { color: white !important; font-size: 1.4rem; margin-bottom: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); line-height: 1.2; }
 .caption p {
-    max-height: 150px; /* より多くのテキストを表示可能に */
+    max-height: 200px; /* テキスト表示領域を増加 (150pxから拡大) */
     overflow-y: auto;
-    line-height: 1.5;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+    line-height: 1.6;
+    font-size: 0.95rem; /* フォントサイズ微調整 */
+    margin-bottom: 15px;
+    padding-right: 10px; /* スクロールバー用の余白 */
+}
+.caption p::-webkit-scrollbar {
+    width: 5px;
+}
+.caption p::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
 }
 .gallery-controls {
     display: flex;
@@ -279,7 +287,13 @@ footer { background-color: var(--dark-color); color: white; padding: 60px 0; pos
   .detail-card { padding: 20px; margin-bottom: 15px; }
   .payment-options { gap: 15px; }
   .parallax-section .content-container { padding: 20px; }
-  .caption { padding: 30px 20px 20px; }
+  .caption {
+    padding: 35px 20px 20px;
+    max-height: 55%; /* モバイルではさらに大きく */
+    }
+    .caption p {
+        max-height: 30%;
+    }
   .caption h3 { font-size: 1.4rem; }
   .gallery-arrow { width: 55px; height: 55px; background-color: rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.7); }
   .rsvp-form-container { padding: 30px 20px; }
