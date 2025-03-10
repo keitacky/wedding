@@ -173,13 +173,27 @@ document.addEventListener('DOMContentLoaded', function()  {
         }
         
         // Set up intersection observer to detect which section is in view
-        // モバイル時のスクロール動作調整
+        // モバイル最適化
         const isMobile = window.innerWidth <= 768;
-        const observerOptions = {
-            root: null,
-            rootMargin: isMobile ? '-20% 0px' : '-50% 0px',
-            threshold: 0
-        };
+
+        // モバイルではスクロールスナップの動作を緩和
+        if (isMobile) {
+            document.documentElement.style.scrollSnapType = 'none';
+            
+            // 178行目付近のスクロールオブザーバー設定
+            const observerOptions = {
+                root: null,
+                rootMargin: '-10% 0px', // モバイルでより広い範囲でセクション認識
+                threshold: 0.1 // より低い閾値
+            };
+        } else {
+            // PC向け設定
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px',
+                threshold: 0
+            };
+        }
         
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -206,21 +220,27 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Handle mousewheel events for smooth section transitions
         let wheelTimeout;
-        window.addEventListener('wheel', (e) => {
-            clearTimeout(wheelTimeout);
-            
-            wheelTimeout = setTimeout(() => {
-                if (isScrolling) return;
+        // モバイルではwheelイベントでのページ切替を無効化
+        if (!isMobile) {
+            window.addEventListener('wheel', (e) => {
+                clearTimeout(wheelTimeout);
                 
-                if (e.deltaY > 0) {
-                    // Scroll down
-                    goToSection(currentSection + 1);
-                } else {
-                    // Scroll up
-                    goToSection(currentSection - 1);
-                }
-            }, 50);
-        }, { passive: true });
+                wheelTimeout = setTimeout(() => {
+                    if (isScrolling) return;
+                    
+                    if (e.deltaY > 0) {
+                        // Scroll down
+                        goToSection(currentSection + 1);
+                    } else {
+                        // Scroll up
+                        goToSection(currentSection - 1);
+                    }
+                }, 50);
+            }, { passive: true });
+        } else {
+            // モバイルではスクロール動作を無効化
+            window.removeEventListener('wheel', wheelHandler);
+        }
         
         // Handle key events
         window.addEventListener('keydown', (e) => {
