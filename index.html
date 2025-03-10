@@ -167,7 +167,7 @@
         </div>
     </section>
 
-    <!-- RSVP Section - Google Form埋め込み版 -->
+    <!-- RSVPセクション - カスタムフォーム -->
     <section id="rsvp" class="full-screen rsvp-section">
         <div class="section-bg" style="background-image: url('images/rsvp-bg.jpg');"></div>
         <div class="content-container">
@@ -177,12 +177,69 @@
             </div>
             <p class="section-intro light">We hope you can join us for our special day. Please RSVP by May 1, 2025.</p>
             
-            <!-- Google Form埋め込み -->
-            <div class="google-form-container">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScDDSflQJacUv942nx8hUct8LknFlFfk65xEXo2TCbWAQX93A/viewform?embedded=true" 
-                        width="100%" height="780" frameborder="0" marginheight="0" marginwidth="0">
-                    Loading…
-                </iframe>
+            <!-- カスタムフォームコンテナ -->
+            <div class="rsvp-form-container">
+                <form id="rsvp-form" action="https://formspree.io/f/FORMSPREE_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group radio-group">
+                        <span class="group-label">Will you be attending?</span>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="attending" value="Yes" required>
+                                <span>Joyfully Accept</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="attending" value="No">
+                                <span>Regretfully Decline</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guests">Number of Guests (including yourself)</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message (Optional)</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary">Send RSVP</button>
+                    </div>
+                </form>
+                
+                <!-- 送信完了メッセージ (最初は非表示) -->
+                <div id="form-success" class="form-response" style="display:none;">
+                    <div class="response-icon">✓</div>
+                    <h3>Thank You!</h3>
+                    <p>Your RSVP has been received. We look forward to celebrating with you!</p>
+                </div>
+                
+                <!-- エラーメッセージ (最初は非表示) -->
+                <div id="form-error" class="form-response error" style="display:none;">
+                    <div class="response-icon">!</div>
+                    <h3>Oops!</h3>
+                    <p>Something went wrong. Please try again or contact us directly.</p>
+                    <button class="btn" id="try-again-btn">Try Again</button>
+                </div>
             </div>
         </div>
     </section>

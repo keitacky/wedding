@@ -317,4 +317,67 @@ document.addEventListener('DOMContentLoaded', function()  {
             });
         }
     });
+
+    // RSVPフォーム送信処理を追加
+    const form = document.getElementById('rsvp-form');
+    const formSuccess = document.getElementById('form-success');
+    const formError = document.getElementById('form-error');
+    const tryAgainBtn = document.getElementById('try-again-btn');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // フォームデータを取得
+            const formData = new FormData(form);
+            const action = form.getAttribute('action');
+            
+            // 送信中の表示
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Formspreeにデータ送信
+            fetch(action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                // 成功
+                form.style.display = 'none';
+                formSuccess.style.display = 'block';
+                formError.style.display = 'none';
+            })
+            .catch(error => {
+                // エラー
+                console.error('Error:', error);
+                form.style.display = 'none';
+                formError.style.display = 'block';
+                formSuccess.style.display = 'none';
+            })
+            .finally(() => {
+                // ボタンを元に戻す
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+        
+        // 「もう一度試す」ボタンの処理
+        if (tryAgainBtn) {
+            tryAgainBtn.addEventListener('click', function() {
+                form.style.display = 'flex';
+                formError.style.display = 'none';
+            });
+        }
+    }
 });
