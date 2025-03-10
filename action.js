@@ -248,60 +248,6 @@ document.addEventListener('DOMContentLoaded', function()  {
         }
     };
 
-    // RSVP form (keeping existing code)
-    const rsvpSection = document.getElementById('rsvp-form');
-    
-    if (rsvpSection) {
-        const rsvpForm = document.createElement('form');
-        rsvpForm.innerHTML = `
-            <div class="form-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label>Will you be attending?</label>
-                <div class="radio-group">
-                    <input type="radio" id="attending-yes" name="attending" value="yes" required>
-                    <label for="attending-yes">Yes</label>
-                    <input type="radio" id="attending-no" name="attending" value="no">
-                    <label for="attending-no">No</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="guests">Number of Guests</label>
-                <input type="number" id="guests" name="guests" min="0" value="0">
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4"></textarea>
-            </div>
-            <button type="submit">Send RSVP</button>
-        `;
-        
-        rsvpSection.appendChild(rsvpForm);
-        
-        // Form submission handler
-        rsvpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Display message on form submission
-            const formData = new FormData(rsvpForm);
-            let responseMessage = document.createElement('div');
-            responseMessage.className = 'response-message';
-            responseMessage.innerHTML = `
-                <h3>Thank you, ${formData.get('name')}!</h3>
-                <p>We have received your RSVP.</p>
-            `;
-            
-            rsvpForm.style.display = 'none';
-            rsvpSection.appendChild(responseMessage);
-        });
-    }
-
     // Countdown timer (keeping existing code)
     const weddingDate = new Date('2025-05-26T14:00:00');
     const timer = document.getElementById('timer');
