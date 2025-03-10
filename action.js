@@ -246,14 +246,17 @@ document.addEventListener('DOMContentLoaded', function()  {
     const weddingDate = new Date('2025-05-26T14:00:00');
     const timer = document.getElementById('timer');
     
+    const miniCountdown = document.getElementById('when-countdown');
+
     function updateCountdown() {
-        if (!timer) return;
+        if (!timer && !miniCountdown) return;
         
         const now = new Date();
         const diff = weddingDate - now;
         
         if (diff <= 0) {
-            timer.innerHTML = "<span>It's our wedding day!</span>";
+            if (timer) timer.innerHTML = "<span>It's our wedding day!</span>";
+            if (miniCountdown) miniCountdown.innerHTML = "Today's the day!";
             return;
         }
         
@@ -262,15 +265,26 @@ document.addEventListener('DOMContentLoaded', function()  {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        timer.innerHTML = `
-            <span>${days}<br>Days</span> 
-            <span>${hours}<br>Hours</span> 
-            <span>${minutes}<br>Minutes</span> 
-            <span>${seconds}<br>Seconds</span>
-        `;
+        if (timer) {
+            timer.innerHTML = `
+                <span>${days}<br>Days</span> 
+                <span>${hours}<br>Hours</span> 
+                <span>${minutes}<br>Minutes</span> 
+                <span>${seconds}<br>Seconds</span>
+            `;
+        }
+        
+        if (miniCountdown) {
+            miniCountdown.innerHTML = `
+                <span>Countdown:</span>
+                <span><span class="count-value">${days}</span> days 
+                <span class="count-value">${hours}</span> hrs 
+                <span class="count-value">${minutes}</span> min</span>
+            `;
+        }
     }
     
-    if (timer) {
+    if (timer || miniCountdown) {
         updateCountdown();
         setInterval(updateCountdown, 1000);
     }
