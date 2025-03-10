@@ -567,6 +567,9 @@ p {
     position: relative;
     height: 600px; /* ここの値を変更すると全体の高さが変わります */
     margin-bottom: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 20px;
 }
 
 .gallery-image {
@@ -578,11 +581,15 @@ p {
     opacity: 0;
     transition: opacity 1s ease, transform 3s ease;
     transform: scale(1.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .gallery-image.active {
     opacity: 1;
     transform: scale(1);
+    z-index: 1;
 }
 
 /* 2. 写真自体のサイズ調整 */
@@ -592,6 +599,13 @@ p {
     /* または特定の高さに固定したい場合: height: 500px; など */
     object-fit: cover; /* 画像の切り抜き方法を指定 */
     border-radius: 8px;
+    max-height: 65%; /* コンテナの65%までの高さ */
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* アスペクト比を維持 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
 }
 
 .caption {
@@ -604,6 +618,13 @@ p {
     background: linear-gradient(transparent, rgba(0,0,0,0.8));
     color: white;
     border-radius: 0 0 4px 4px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 30%;
+    overflow-y: auto;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 .caption h3 {
@@ -658,6 +679,33 @@ p {
 .gallery-arrow:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+
+/* スマートフォン対応 */
+@media (max-width: 768px) {
+    .gallery-container {
+        height: 500px;
+    }
+    
+    .gallery-image img {
+        max-height: 60%;
+    }
+    
+    .caption {
+        max-height: 35%;
+        padding: 10px;
+    }
+}
+
+/* 小さいスクリーン向け */
+@media (max-width: 480px) {
+    .gallery-container {
+        height: 450px;
+    }
+    
+    .gallery-image img {
+        max-height: 55%;
+    }
 }
 
 /* RSVP Section */
