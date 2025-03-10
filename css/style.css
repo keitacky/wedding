@@ -14,12 +14,15 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-    height: 100%;
-    scroll-snap-type: none !important; /* スクロールスナップを無効化 */
-    overflow-y: auto !important;
+/* スクロールスナップの完全な無効化 */
+html, body {
+    scroll-snap-type: none !important;
+    overflow: auto !important;
     height: auto !important;
+}
+
+section {
+    scroll-snap-align: none !important;
 }
 
 body {
@@ -28,9 +31,6 @@ body {
     color: var(--dark-color);
     overflow-x: hidden;
     min-height: 100%;
-    scroll-snap-type: none !important; /* スクロールスナップを無効化 */
-    overflow-y: auto !important;
-    height: auto !important;
 }
 
 /* Typography */

@@ -43,14 +43,9 @@ document.addEventListener('DOMContentLoaded', function()  {
     function initFullScreenSections() {
         const sections = document.querySelectorAll('section');
         const totalSections = sections.length;
-        let currentSection = 0;
-        let isScrolling = false;
-        let touchStartY = 0;
-        let touchEndY = 0;
         
-        // Add scroll-section class to all sections
+        // セクション用のインジケーターは維持
         sections.forEach((section, index) => {
-            section.classList.add('scroll-section');
             section.setAttribute('data-index', index);
             
             // Create navigation indicators
@@ -61,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function()  {
             document.querySelector('.section-indicators').appendChild(indicator);
         });
         
-        // Create section indicators container
+        // インジケーター作成関数は維持
         function createIndicators() {
             const indicatorsContainer = document.createElement('div');
             indicatorsContainer.className = 'section-indicators';
             document.body.appendChild(indicatorsContainer);
         }
         
-        // Update active section indicator
+        // インジケーター更新関数は維持するが、スクロールに合わせて動作するよう変更
         function updateIndicators(index) {
             const indicators = document.querySelectorAll('.section-indicator');
             indicators.forEach((indicator, i) => {
@@ -80,210 +75,50 @@ document.addEventListener('DOMContentLoaded', function()  {
             });
         }
         
-        // Navigate to section
-        function goToSection(index) {
-            if (isScrolling) return;
-            isScrolling = true;
+        // スクロール位置に応じてインジケーターを更新する
+        window.addEventListener('scroll', function() {
+            // 現在のスクロール位置を取得
+            const scrollPosition = window.pageYOffset + window.innerHeight / 2;
             
-            if (index < 0) index = 0;
-            if (index >= totalSections) index = totalSections - 1;
+            // 最も近いセクションを見つける
+            let closest = null;
+            let closestDistance = Infinity;
             
-            currentSection = index;
-            updateIndicators(currentSection);
-            
-            const targetSection = sections[index];
-            const targetPosition = targetSection.offsetTop;
-            
-            // Add active class to target section and remove from others
-            sections.forEach((section, i) => {
-                if (i === index) {
-                    section.classList.add('active-section');
-                    // Execute enter animations for the section
-                    animateSectionEnter(section);
-                } else {
-                    section.classList.remove('active-section');
-                    // Only animate exit for adjacent sections
-                    if (Math.abs(i - index) === 1) {
-                        animateSectionExit(section, i < index ? 'up' : 'down');
-                    }
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const distance = Math.abs(scrollPosition - (sectionTop + sectionHeight / 2));
+                
+                if (distance < closestDistance) {
+                    closest = index;
+                    closestDistance = distance;
                 }
             });
             
-            // Smooth scroll to section
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-            
-            // Reset scroll lock after animation completes
-            setTimeout(() => {
-                isScrolling = false;
-            }, 600);  // 1000msから600msに短縮
-        }
-        
-        // Animate section entrance
-        function animateSectionEnter(section) {
-            // すべてのセクションを静的に表示（アニメーションなし）
-            if (section.classList.contains('static-content')) {
-                return; // 静的コンテンツはアニメーションしない
+            if (closest !== null) {
+                updateIndicators(closest);
             }
-            
-            // 他のセクションのアニメーション（必要な場合）
-            const elements = section.querySelectorAll('.animate-on-scroll');
-            elements.forEach((el, i) => {
-                setTimeout(() => {
-                    el.classList.add('in-view');
-                }, i * 150);
-            });
-            
-            // 背景画像のアニメーション（軽量化）
-            const bg = section.querySelector('.section-bg');
-            if (bg) {
-                bg.style.transform = 'scale(1)';
-                bg.style.opacity = '1';
-            }
-        }
-        
-        // Animate section exit
-        function animateSectionExit(section, direction) {
-            if (section.id === 'details') {
-                // Detailsセクション内の要素はアニメーションせず常に表示のまま
-            } else {
-                const elements = section.querySelectorAll('.animate-on-scroll:not(.no-animation)');
-                elements.forEach((el) => {
-                    el.classList.remove('in-view');
-                    
-                    if (direction === 'up') {
-                        el.classList.add('exit-up');
-                    } else {
-                        el.classList.add('exit-down');
-                    }
-                    
-                    setTimeout(() => {
-                        el.classList.remove('exit-up', 'exit-down');
-                    }, 1000);
-                });
-            }
-            
-            // 背景画像のアニメーション
-            const bg = section.querySelector('.section-bg');
-            if (bg) {
-                bg.style.transform = direction === 'up' ? 'scale(1.1) translateY(-5%)' : 'scale(1.1) translateY(5%)';
-                bg.style.opacity = '0.8';
-            }
-        }
-        
-        // Set up intersection observer to detect which section is in view
-        const isMobile = window.innerWidth <= 768;
-
-        // 共通の observer オプションを設定
-        const observerOptions = {
-            root: null,
-            rootMargin: isMobile ? '-10% 0px' : '-20% 0px',
-            threshold: 0.1
-        };
-
-        // モバイルではスクロールスナップを無効化
-        if (isMobile) {
-            document.documentElement.style.scrollSnapType = 'none';
-            document.documentElement.style.scrollBehavior = 'auto';
-            
-            // スクロール処理を軽量化
-            sections.forEach(section => {
-                section.style.minHeight = 'auto';
-                section.style.height = 'auto';
-            });
-        }
-        
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !isScrolling) {
-                    const index = parseInt(entry.target.getAttribute('data-index'));
-                    currentSection = index;
-                    updateIndicators(currentSection);
-                }
-            });
-        }, observerOptions);
-        
-        sections.forEach(section => {
-            sectionObserver.observe(section);
         });
         
-        // Set up click handlers for section indicators
+        // インジケーターのクリックイベントは通常のスクロールに変更
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('section-indicator') || e.target.parentElement.classList.contains('section-indicator')) {
                 const target = e.target.classList.contains('section-indicator') ? e.target : e.target.parentElement;
                 const index = parseInt(target.getAttribute('data-section'));
-                goToSection(index);
-            }
-        });
-        
-        // Handle mousewheel events for smooth section transitions
-        let wheelTimeout;
-        // モバイルではwheelイベントでのページ切替を無効化
-        if (!isMobile) {
-            window.addEventListener('wheel', (e) => {
-                clearTimeout(wheelTimeout);
+                const targetSection = sections[index];
                 
-                wheelTimeout = setTimeout(() => {
-                    if (isScrolling) return;
-                    
-                    if (e.deltaY > 0) {
-                        // Scroll down
-                        goToSection(currentSection + 1);
-                    } else {
-                        // Scroll up
-                        goToSection(currentSection - 1);
-                    }
-                }, 50);
-            }, { passive: true });
-        }
-        
-        // Handle key events
-        window.addEventListener('keydown', (e) => {
-            if (isScrolling) return;
-            
-            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-                goToSection(currentSection + 1);
-                e.preventDefault();
-            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-                goToSection(currentSection - 1);
-                e.preventDefault();
+                // スムーススクロールで対象セクションへ移動
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
         });
         
-        // Handle touch events for mobile
-        window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        }, { passive: true });
+        // ★★★ 以下のイベントリスナーを削除 ★★★
+        // wheel, keydown, touchstartなどのスクロールスナップ関連のイベントは削除
         
-        window.addEventListener('touchend', (e) => {
-            if (isScrolling) return;
-            
-            touchEndY = e.changedTouches[0].clientY;
-            const diff = touchStartY - touchEndY;
-            
-            // Only trigger if significant swipe
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    // Swipe up - go to next section
-                    goToSection(currentSection + 1);
-                } else {
-                    // Swipe down - go to previous section
-                    goToSection(currentSection - 1);
-                }
-            }
-        }, { passive: true });
-        
-        // Set initial active section
+        // 初期インジケーターの設定
         updateIndicators(0);
-        sections[0].classList.add('active-section');
-        setTimeout(() => animateSectionEnter(sections[0]), 100);
-        
-        // Add animation classes to elements
-        document.querySelectorAll('.section-heading, .section-content, .detail-card, .gallery-container, .payment-card').forEach(el => {
-            el.classList.add('animate-on-scroll');
-        });
     }
 
     // Enhanced parallax effect for background images
@@ -513,24 +348,12 @@ document.addEventListener('DOMContentLoaded', function()  {
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // Get section index
-                    const index = parseInt(targetElement.getAttribute('data-index'));
-                    if (!isNaN(index)) {
-                        // If we're using full screen sections, use our custom navigation
-                        const event = new CustomEvent('navigateToSection', {
-                            detail: { sectionIndex: index }
-                        });
-                        document.dispatchEvent(event);
-                    } else {
-                        // Fall back to default smooth scroll
-                        const navHeight = navbar.offsetHeight;
-                        const targetPosition = targetElement.offsetTop - navHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
+                    // 単純にスムーススクロールで移動
+                    const navHeight = navbar.offsetHeight;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - navHeight,
+                        behavior: 'smooth'
+                    });
                 }
             }
         });
@@ -539,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function()  {
     // Custom event listener for section navigation
     document.addEventListener('navigateToSection', (e) => {
         const sectionIndex = e.detail.sectionIndex;
-        const sections = document.querySelectorAll('.scroll-section');
+        const sections = document.querySelectorAll('section');
         
         if (sections.length > sectionIndex) {
             window.scrollTo({
