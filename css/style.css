@@ -600,27 +600,30 @@ p {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8) 30%);
+    background: linear-gradient(transparent, rgba(0,0,0,0.85) 20%);
     color: white;
     border-radius: 0 0 8px 8px;
-    padding: 40px 30px 25px;
+    padding: 30px 25px 15px; /* パディングを縮小 */
     text-align: left;
+    max-height: 35%; /* 最大高さを制限 */
 }
 
 .caption h3 {
     color: white !important;
-    font-size: 1.6rem;
-    margin-bottom: 5px;
+    font-size: 1.4rem; /* フォントサイズ縮小 */
+    margin-bottom: 2px; /* 余白縮小 */
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    line-height: 1.2; /* 行間縮小 */
 }
 
 .caption p {
     color: rgba(255,255,255,0.9);
-    font-size: 0.95rem;
-    margin-bottom: 5px;
+    font-size: 0.85rem; /* フォントサイズ縮小 */
+    margin-bottom: 3px;
     text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    max-height: 120px;
+    max-height: 100px; 
     overflow-y: auto;
+    line-height: 1.4; /* 行間縮小 */
 }
 
 .gallery-controls {
@@ -672,35 +675,35 @@ p {
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-    .gallery-container {
-        height: 550px;
-    }
-    
     .caption {
-        padding: 30px 20px 20px;
+        padding: 25px 15px 12px;
+        max-height: 40%;
     }
     
     .caption h3 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        margin-bottom: 2px;
+    }
+    
+    .caption p {
+        font-size: 0.8rem;
+        line-height: 1.35;
     }
 }
 
 @media (max-width: 480px) {
-    .gallery-container {
-        height: 450px;
-    }
-    
     .caption {
-        padding: 25px 15px 15px;
+        padding: 20px 15px 10px;
     }
     
     .caption h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        margin-bottom: 1px;
     }
     
     .caption p {
-        font-size: 0.85rem;
-        max-height: 100px;
+        font-size: 0.75rem;
+        line-height: 1.3;
     }
 }
 
