@@ -118,15 +118,32 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Animate section entrance
         function animateSectionEnter(section) {
-            // Select all animatable elements in the section
-            const elements = section.querySelectorAll('.animate-on-scroll');
-            elements.forEach((el, i) => {
-                setTimeout(() => {
-                    el.classList.add('in-view');
-                }, i * 150); // Stagger the animations
-            });
+            // Detailsセクションの特別処理
+            if (section.id === 'details') {
+                // Detailsのカード要素はアニメーションせず、常に表示
+                section.querySelectorAll('.detail-card, .countdown-container').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+                
+                // Donation部分のみ通常アニメーション
+                const donationElements = section.querySelectorAll('.donation-section .animate-on-scroll');
+                donationElements.forEach((el, i) => {
+                    setTimeout(() => {
+                        el.classList.add('in-view');
+                    }, i * 150);
+                });
+            } else {
+                // 他のセクションは通常どおりアニメーション
+                const elements = section.querySelectorAll('.animate-on-scroll');
+                elements.forEach((el, i) => {
+                    setTimeout(() => {
+                        el.classList.add('in-view');
+                    }, i * 150);
+                });
+            }
             
-            // Special animation for the background image
+            // 背景画像のアニメーション
             const bg = section.querySelector('.section-bg');
             if (bg) {
                 bg.style.transform = 'scale(1)';
@@ -136,25 +153,33 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Animate section exit
         function animateSectionExit(section, direction) {
-            // Select all animatable elements in the section
-            const elements = section.querySelectorAll('.animate-on-scroll');
-            elements.forEach((el) => {
-                el.classList.remove('in-view');
-                
-                // Add direction-based exit class if needed
-                if (direction === 'up') {
-                    el.classList.add('exit-up');
-                } else {
-                    el.classList.add('exit-down');
-                }
-                
-                // Remove exit classes after animation
-                setTimeout(() => {
-                    el.classList.remove('exit-up', 'exit-down');
-                }, 1000);
-            });
+            // Detailsセクションの特別処理
+            if (section.id === 'details') {
+                // Detailsのカード要素はアニメーションせず、常に表示
+                // Donation部分のみ通常アニメーション
+                const donationElements = section.querySelectorAll('.donation-section .animate-on-scroll');
+                donationElements.forEach((el) => {
+                    el.classList.remove('in-view');
+                });
+            } else {
+                // 他のセクションは通常どおりアニメーション
+                const elements = section.querySelectorAll('.animate-on-scroll');
+                elements.forEach((el) => {
+                    el.classList.remove('in-view');
+                    
+                    if (direction === 'up') {
+                        el.classList.add('exit-up');
+                    } else {
+                        el.classList.add('exit-down');
+                    }
+                    
+                    setTimeout(() => {
+                        el.classList.remove('exit-up', 'exit-down');
+                    }, 1000);
+                });
+            }
             
-            // Special animation for the background image
+            // 背景画像のアニメーション
             const bg = section.querySelector('.section-bg');
             if (bg) {
                 bg.style.transform = direction === 'up' ? 'scale(1.1) translateY(-5%)' : 'scale(1.1) translateY(5%)';
