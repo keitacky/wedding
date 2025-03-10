@@ -108,30 +108,48 @@ p { margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
 }
 .dot { width: 10px; height: 10px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.4); cursor: pointer; transition: all 0.3s ease; }
 .dot.active { background-color: var(--primary-color); transform: scale(1.3); }
+
+
 .gallery-arrow {
+    /* サイズ拡大 */
+    width: 70px !important;
+    height: 70px !important;
+    /* 視認性向上 */
+    background-color: rgba(0,0,0,0.7) !important;
+    border: 2px solid rgba(255,255,255,0.95) !important;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.4) !important;
+    /* アニメーション */
+    transition: all 0.2s ease !important;
+    /* レイアウト */
     position: relative !important;
     display: inline-flex !important;
     justify-content: center !important;
     align-items: center !important;
     margin: 0 15px !important;
-    flex-shrink: 0 !important;
+    cursor: pointer !important;
+    /* 追加：ボタンを目立たせる */
+    border-radius: 50% !important;
     z-index: 300 !important;
-    /* iOS対応 */
-    transform: none !important;
-    -webkit-transform: none !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
 }
-/* iOSデバイス特有のスタイル */
+.gallery-arrow:hover {
+    background-color: rgba(214, 186, 141, 0.8) !important; /* primary-colorと同じ色味 */
+    transform: scale(1.05) !important;
+}
+/* 矢印記号強化 - HTMLの矢印を« »に変更する場合はこちらを使用 */
+.gallery-arrow span {
+    font-size: 36px !important;
+    font-weight: bold !important;
+    color: white !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8) !important;
+    position: relative !important;
+    z-index: 10 !important;
+    line-height: 1 !important;
+}
+
+/* iOSデバイス特有のスタイル - そのまま維持 */
 @supports (-webkit-touch-callout: none) {
-    .gallery-controls {
-        padding: 15px 0;
-    }
-    
     .gallery-arrow {
-        /* 位置をリセット */
+        /* 位置をリセット - 既存の設定を維持 */
         position: relative !important;
         display: inline-flex !important;
         flex: 0 0 auto !important;
@@ -141,26 +159,28 @@ p { margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
         right: auto !important;
         bottom: auto !important;
     }
-    
-    /* ボタンのずれを防ぐ */
-    #prev-photo, #next-photo {
-        margin: 0 15px !important;
-    }
 }
+
+/* モバイルデバイス対応の改善 */
 @media only screen and (max-width: 480px) {
-    .gallery-controls {
-        padding: 15px 10px;
-        gap: 10px;
-    }
-    
     .gallery-arrow {
-        width: 50px !important;
-        height: 50px !important;
-        margin: 0 5px !important;
+        /* 小さい画面でも十分な大きさを確保 */
+        width: 55px !important;
+        height: 55px !important;
+        margin: 0 8px !important;
     }
     
-    .dots-container {
-        gap: 8px;
+    .gallery-arrow span {
+        font-size: 30px !important; /* 文字サイズも調整 */
+    }
+    
+    /* iOSモバイル向けの明示的な設定 */
+    @supports (-webkit-touch-callout: none) {
+        .gallery-arrow {
+            opacity: 1 !important;
+            background-color: rgba(0,0,0,0.8) !important; /* より濃く */
+            border: 2px solid rgba(255,255,255,1) !important; /* より目立つ境界線 */
+        }
     }
 }
 /* ボタンの内容を強化 */
