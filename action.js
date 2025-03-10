@@ -118,24 +118,16 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Animate section entrance
         function animateSectionEnter(section) {
-            // Detailsセクションの特別処理
+            // Details/Donationセクションの特別処理
             if (section.id === 'details') {
-                // Detailsのカード要素はアニメーションせず、常に表示
-                section.querySelectorAll('.detail-card, .countdown-container').forEach(el => {
+                // すべての重要な要素を常に表示
+                section.querySelectorAll('.detail-card, .countdown-container, .payment-card, .section-heading, .section-subheading, .section-intro').forEach(el => {
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
                 });
-                
-                // Donation部分のみ通常アニメーション
-                const donationElements = section.querySelectorAll('.donation-section .animate-on-scroll');
-                donationElements.forEach((el, i) => {
-                    setTimeout(() => {
-                        el.classList.add('in-view');
-                    }, i * 150);
-                });
             } else {
-                // 他のセクションは通常どおりアニメーション
-                const elements = section.querySelectorAll('.animate-on-scroll');
+                // 他のセクションは通常どおりアニメーション (no-animationクラスは除外)
+                const elements = section.querySelectorAll('.animate-on-scroll:not(.no-animation)');
                 elements.forEach((el, i) => {
                     setTimeout(() => {
                         el.classList.add('in-view');
@@ -153,17 +145,10 @@ document.addEventListener('DOMContentLoaded', function()  {
         
         // Animate section exit
         function animateSectionExit(section, direction) {
-            // Detailsセクションの特別処理
             if (section.id === 'details') {
-                // Detailsのカード要素はアニメーションせず、常に表示
-                // Donation部分のみ通常アニメーション
-                const donationElements = section.querySelectorAll('.donation-section .animate-on-scroll');
-                donationElements.forEach((el) => {
-                    el.classList.remove('in-view');
-                });
+                // Detailsセクション内の要素はアニメーションせず常に表示のまま
             } else {
-                // 他のセクションは通常どおりアニメーション
-                const elements = section.querySelectorAll('.animate-on-scroll');
+                const elements = section.querySelectorAll('.animate-on-scroll:not(.no-animation)');
                 elements.forEach((el) => {
                     el.classList.remove('in-view');
                     
@@ -188,9 +173,11 @@ document.addEventListener('DOMContentLoaded', function()  {
         }
         
         // Set up intersection observer to detect which section is in view
+        // モバイル時のスクロール動作調整
+        const isMobile = window.innerWidth <= 768;
         const observerOptions = {
             root: null,
-            rootMargin: '-50% 0px',
+            rootMargin: isMobile ? '-20% 0px' : '-50% 0px',
             threshold: 0
         };
         
